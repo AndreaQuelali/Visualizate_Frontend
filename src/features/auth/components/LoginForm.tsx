@@ -50,7 +50,7 @@ export default function LoginForm() {
 
       const { accessToken, user } = response.data;
       login(accessToken, user);
-      navigate('/');
+      navigate('/dashboard');
     } catch (error: unknown) {
       console.error(error);
       const err = error as { response?: { data?: { message?: string } } };

@@ -9,6 +9,7 @@ import ResetPasswordForm from '../features/auth/components/ResetPasswordForm';
 import NewPasswordForm from '../features/auth/components/NewPasswordForm';
 import VerifyEmailDetail from '../features/auth/components/VerifyEmailDetail';
 import ProfileForm from '../features/auth/components/ProfileForm';
+import DashboardPage from '../features/dashboard/DashboardPage';
 
 export const router = createBrowserRouter([
   // Rutas de Autenticación
@@ -29,18 +30,12 @@ export const router = createBrowserRouter([
     path: '/',
     element: <ProtectedRoute />,
     children: [
+      { index: true, element: <Navigate to="/dashboard" replace /> },
+      { path: 'dashboard', element: <DashboardPage /> },
       {
         path: '',
         element: <AppLayout />,
-        children: [
-          {
-            path: '',
-            element: (
-              <div className="text-foreground">Inicio - Visualizate</div>
-            ),
-          },
-          { path: 'profile', element: <ProfileForm /> },
-        ],
+        children: [{ path: 'profile', element: <ProfileForm /> }],
       },
     ],
   },
