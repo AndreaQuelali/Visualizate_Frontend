@@ -53,10 +53,10 @@ export default function ResetPasswordForm() {
     <div className="w-full max-w-[440px] z-10 animate-fade-in my-6">
       {/* Cabecera de marca */}
       <div className="flex flex-col items-center mb-6">
-        <div className="w-12 h-12 bg-[#4648d4] rounded-xl flex items-center justify-center mb-3 shadow-lg shadow-[#4648d4]/20 text-white">
+        <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center mb-3 shadow-lg shadow-primary/20 text-white">
           <HelpCircle className="w-7 h-7" />
         </div>
-        <h2 className="font-sans text-xl font-bold text-[#4648d4] tracking-tight">
+        <h2 className="font-sans text-xl font-bold text-primary tracking-tight">
           Visualizate
         </h2>
       </div>
@@ -89,7 +89,7 @@ export default function ResetPasswordForm() {
 
             <Link
               to="/login"
-              className="mt-4 w-full bg-[#4648d4] text-white py-2.5 rounded-lg text-sm font-semibold shadow-sm hover:bg-[#4648d4]/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+              className="mt-4 w-full bg-primary text-white py-2.5 rounded-lg text-sm font-semibold shadow-sm hover:bg-primary/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
             >
               <ArrowLeft className="w-4 h-4" />
               Volver al inicio de sesión
@@ -112,7 +112,7 @@ export default function ResetPasswordForm() {
                   id="email"
                   type="email"
                   placeholder="nombre@empresa.com"
-                  className={`w-full px-3 py-2 pl-10 rounded-lg border bg-[#f3f4f5] dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#4648d4]/10 focus:border-[#4648d4] transition-all text-sm ${
+                  className={`w-full px-3 py-2 pl-10 rounded-lg border bg-[#f3f4f5] dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all text-sm ${
                     errors.email ? 'border-destructive' : 'border-border'
                   }`}
                   {...register('email')}
@@ -129,7 +129,7 @@ export default function ResetPasswordForm() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-[#4648d4] hover:bg-[#4648d4]/90 text-white font-semibold py-2.5 rounded-lg shadow-md shadow-[#4648d4]/10 transition-all flex items-center justify-center gap-2 text-sm disabled:opacity-75 disabled:cursor-not-allowed"
+              className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-2.5 rounded-lg shadow-md shadow-primary/10 transition-all flex items-center justify-center gap-2 text-sm disabled:opacity-75 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <>
@@ -168,7 +168,7 @@ export default function ResetPasswordForm() {
           <div className="flex justify-center border-t border-border pt-4">
             <Link
               to="/login"
-              className="flex items-center gap-1.5 text-[#4648d4] hover:text-[#4648d4]/90 font-semibold text-xs transition-colors"
+              className="flex items-center gap-1.5 text-primary hover:text-primary/90 font-semibold text-xs transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               Volver al inicio de sesión
@@ -182,7 +182,7 @@ export default function ResetPasswordForm() {
         ¿Tienes problemas?{' '}
         <a
           href="#"
-          className="text-foreground hover:text-[#4648d4] transition-colors font-medium underline underline-offset-4"
+          className="text-foreground hover:text-primary transition-colors font-medium underline underline-offset-4"
         >
           Contacta con soporte
         </a>
