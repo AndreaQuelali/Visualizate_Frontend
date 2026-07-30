@@ -41,14 +41,14 @@ export default function VerifyEmailDetail() {
   return (
     <div className="w-full max-w-md bg-white dark:bg-card border border-border p-8 rounded-xl shadow-xl text-center flex flex-col items-center gap-6 animate-fade-in my-6">
       <div className="flex justify-center">
-        <span className="font-sans text-xl font-bold text-[#4648d4] tracking-tight">
+        <span className="font-sans text-xl font-bold text-primary tracking-tight">
           Visualizate
         </span>
       </div>
 
       {status === 'loading' && (
         <div className="space-y-4 flex flex-col items-center">
-          <Loader2 className="w-12 h-12 text-[#4648d4] animate-spin" />
+          <Loader2 className="w-12 h-12 text-primary animate-spin" />
           <h2 className="text-lg font-bold text-foreground">
             Confirmando verificación...
           </h2>
@@ -74,7 +74,7 @@ export default function VerifyEmailDetail() {
           </div>
           <Link
             to="/login"
-            className="w-full bg-[#4648d4] text-white py-2.5 rounded-lg text-sm font-semibold shadow-sm hover:bg-[#4648d4]/90 active:scale-[0.98] transition-all flex items-center justify-center"
+            className="w-full bg-primary text-white py-2.5 rounded-lg text-sm font-semibold shadow-sm hover:bg-primary/90 active:scale-[0.98] transition-all flex items-center justify-center"
           >
             Ir al inicio de sesión
           </Link>
@@ -103,7 +103,7 @@ export default function VerifyEmailDetail() {
             </Link>
             <Link
               to="/login"
-              className="text-xs font-semibold text-[#4648d4] hover:underline"
+              className="text-xs font-semibold text-primary hover:underline"
             >
               Volver al inicio de sesión
             </Link>

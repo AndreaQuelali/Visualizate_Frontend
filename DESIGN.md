@@ -22,44 +22,42 @@ El diseño de la interfaz debe transmitir:
 
 ### 2.1 Token de marca
 
-| Nombre        | Valor hex | Uso                                                      |
-| ------------- | --------- | -------------------------------------------------------- |
-| Brand Primary | `#4648d4` | Botones CTA, focus rings, iconos de marca, links activos |
+| Nombre        | Hex de referencia | OKLCH (en CSS)             | Uso                                      |
+| ------------- | ----------------- | -------------------------- | ---------------------------------------- |
+| Brand Primary | `#4648d4`         | `oklch(0.492 0.209 274.9)` | CTAs, focus rings, iconos, links activos |
 
-El indigo vibrante es el único color de marca hardcodeado. Todo lo demás usa
-tokens de diseño.
+`--primary` es el color de marca. En `index.css` se define en **OKLCH**. Usar
+siempre `bg-primary` / `text-primary` / `ring-primary` — no hardcodear colores
+en componentes.
 
 ### 2.2 Tokens semánticos (CSS variables OKLCH)
 
-Definidos en `src/index.css`. Usar **siempre** estos tokens vía clases Tailwind.
+Definidos en `src/index.css` (`:root` claro / `.dark` oscuro) con `oklch(...)`.
+Usar **siempre** estos tokens vía clases Tailwind.
 
 #### Modo claro (`:root`)
 
-| Token CSS              | Clase Tailwind                       | Descripción                                       |
-| ---------------------- | ------------------------------------ | ------------------------------------------------- |
-| `--background`         | `bg-background`                      | Fondo de página (`oklch(1 0 0)` = blanco puro)    |
-| `--foreground`         | `text-foreground`                    | Texto principal (`oklch(0.145 0 0)` = casi negro) |
-| `--card`               | `bg-card`                            | Fondo de tarjetas                                 |
-| `--card-foreground`    | `text-card-foreground`               | Texto en tarjetas                                 |
-| `--muted`              | `bg-muted`                           | Fondo de inputs, secciones atenuadas              |
-| `--muted-foreground`   | `text-muted-foreground`              | Texto secundario/placeholder                      |
-| `--border`             | `border-border`                      | Bordes de componentes                             |
-| `--input`              | `border-input`                       | Borde específico de inputs                        |
-| `--ring`               | `ring-ring`                          | Focus ring estándar                               |
-| `--primary`            | `bg-primary`, `text-primary`         | Acciones primarias (actual: casi negro)           |
-| `--primary-foreground` | `text-primary-foreground`            | Texto sobre fondo primario                        |
-| `--secondary`          | `bg-secondary`                       | Acciones secundarias                              |
-| `--destructive`        | `bg-destructive`, `text-destructive` | Errores, alertas críticas                         |
-| `--radius`             | `rounded-lg`                         | Radio base `0.625rem`                             |
+| Token CSS              | Clase Tailwind                       | Descripción                          |
+| ---------------------- | ------------------------------------ | ------------------------------------ |
+| `--background`         | `bg-background`                      | Fondo de página                      |
+| `--foreground`         | `text-foreground`                    | Texto principal                      |
+| `--card`               | `bg-card`                            | Fondo de tarjetas                    |
+| `--card-foreground`    | `text-card-foreground`               | Texto en tarjetas                    |
+| `--muted`              | `bg-muted`                           | Fondo de inputs, secciones atenuadas |
+| `--muted-foreground`   | `text-muted-foreground`              | Texto secundario/placeholder         |
+| `--border`             | `border-border`                      | Bordes de componentes                |
+| `--input`              | `border-input`                       | Borde específico de inputs           |
+| `--ring`               | `ring-ring`                          | Focus ring estándar                  |
+| `--primary`            | `bg-primary`, `text-primary`         | Acciones primarias / marca           |
+| `--primary-foreground` | `text-primary-foreground`            | Texto sobre fondo primario           |
+| `--secondary`          | `bg-secondary`                       | Acciones secundarias                 |
+| `--destructive`        | `bg-destructive`, `text-destructive` | Errores, alertas críticas            |
+| `--radius`             | `rounded-lg`                         | Radio base `0.625rem`                |
 
 #### Modo oscuro (`.dark`)
 
-Los mismos tokens se remapean automáticamente. Usar siempre los tokens semánticos
-y **no hardcodear** valores OKLCH ni hex para elementos de UI.
-
-> **Excepción legítima**: el color de marca `#4648d4` se usa directamente en
-> formularios de auth donde el `--primary` actual es neutro (casi negro).
-> Cuando `--primary` se actualice al color de marca, migrar a `bg-primary`.
+Los mismos tokens se remapean en OKLCH. Usar siempre los tokens semánticos y
+**no hardcodear** hex/oklch sueltos en la UI.
 
 ### 2.3 Colores de fondo de inputs
 
