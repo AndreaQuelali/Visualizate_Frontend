@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Check, Minus } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { pricingPlans } from '../data/landingContent';
 import { useReveal } from '../hooks/useReveal';
 
@@ -76,16 +77,14 @@ export default function PricingPreview() {
                   </li>
                 ))}
               </ul>
-              <Link
-                to={plan.to}
-                className={`block w-full rounded-xl py-3 text-center text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                  plan.featured
-                    ? 'bg-primary text-primary-foreground hover:opacity-90'
-                    : 'border border-border text-foreground hover:bg-muted'
-                }`}
+              <Button
+                render={<Link to={plan.to} />}
+                nativeButton={false}
+                variant={plan.featured ? 'default' : 'outline'}
+                className="h-auto w-full rounded-xl py-3 text-sm font-semibold"
               >
                 {plan.cta}
-              </Link>
+              </Button>
             </div>
           ))}
         </div>

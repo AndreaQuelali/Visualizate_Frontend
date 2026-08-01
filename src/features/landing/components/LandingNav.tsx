@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
 import { navLinks } from '../data/landingContent';
 import ThemeToggle from './ThemeToggle';
 
@@ -59,21 +60,26 @@ export default function LandingNav() {
 
         <div className="flex items-center gap-2 sm:gap-3">
           <ThemeToggle />
-          <Link
-            to="/login"
-            className="hidden font-mono text-label-sm uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground md:block"
+          <Button
+            render={<Link to="/login" />}
+            nativeButton={false}
+            variant="link"
+            className="hidden font-mono text-label-sm uppercase tracking-wider text-muted-foreground hover:text-foreground md:inline-flex"
           >
             Iniciar sesión
-          </Link>
-          <Link
-            to="/register"
-            className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 sm:px-5"
+          </Button>
+          <Button
+            render={<Link to="/register" />}
+            nativeButton={false}
+            className="rounded-full px-4 sm:px-5"
           >
             Comenzar gratis
-          </Link>
-          <button
+          </Button>
+          <Button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border text-foreground md:hidden"
+            variant="outline"
+            size="icon"
+            className="rounded-xl md:hidden"
             aria-label={mobileOpen ? 'Cerrar menú' : 'Abrir menú'}
             onClick={() => setMobileOpen((o) => !o)}
           >
@@ -82,7 +88,7 @@ export default function LandingNav() {
             ) : (
               <Menu className="h-5 w-5" />
             )}
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -102,13 +108,15 @@ export default function LandingNav() {
                 {link.label}
               </a>
             ))}
-            <Link
-              to="/login"
-              className="font-mono text-label-sm uppercase tracking-wider text-primary"
+            <Button
+              render={<Link to="/login" />}
+              nativeButton={false}
+              variant="link"
+              className="font-mono text-label-sm uppercase tracking-wider"
               onClick={() => setMobileOpen(false)}
             >
               Iniciar sesión
-            </Link>
+            </Button>
           </div>
         </div>
       )}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Minus, Plus } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { faqs } from '../data/landingContent';
 import { useReveal } from '../hooks/useReveal';
 
@@ -30,9 +31,10 @@ export default function FaqSection() {
             const isOpen = openIndex === index;
             return (
               <div key={faq.question} className="border-b border-border">
-                <button
+                <Button
                   type="button"
-                  className="flex w-full items-center justify-between gap-4 py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  variant="ghost"
+                  className="h-auto w-full justify-between gap-4 rounded-none py-5 text-left hover:bg-transparent"
                   aria-expanded={isOpen}
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                 >
@@ -44,7 +46,7 @@ export default function FaqSection() {
                   ) : (
                     <Plus className="h-4 w-4 shrink-0 text-muted-foreground" />
                   )}
-                </button>
+                </Button>
                 <div className={`faq-panel ${isOpen ? 'is-open' : ''}`}>
                   <div>
                     <p className="pb-5 text-body-md text-muted-foreground">

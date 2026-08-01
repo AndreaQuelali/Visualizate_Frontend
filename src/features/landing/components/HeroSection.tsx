@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, PlayCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { hero } from '../data/landingContent';
 import FormatCanvas from './FormatCanvas';
 
@@ -54,20 +55,23 @@ export default function HeroSection() {
             }`}
             style={ready ? { animationDelay: '260ms' } : undefined}
           >
-            <Link
-              to="/register"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            <Button
+              render={<Link to="/register" />}
+              nativeButton={false}
+              className="h-auto gap-2 rounded-xl px-7 py-3.5 text-base font-semibold shadow-lg shadow-primary/25 hover:-translate-y-0.5"
             >
               Comenzar gratis
               <ArrowRight className="h-4 w-4" />
-            </Link>
-            <a
-              href="#como-funciona"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-card/80 px-7 py-3.5 text-base font-semibold text-foreground backdrop-blur-sm transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            </Button>
+            <Button
+              render={<a href="#como-funciona" />}
+              nativeButton={false}
+              variant="outline"
+              className="h-auto gap-2 rounded-xl bg-card/80 px-7 py-3.5 text-base font-semibold backdrop-blur-sm"
             >
               Ver cómo funciona
               <PlayCircle className="h-4 w-4" />
-            </a>
+            </Button>
           </div>
         </div>
 

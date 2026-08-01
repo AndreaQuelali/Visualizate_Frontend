@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { canvasFormats, canvasLabels } from '../data/landingContent';
 
 type FormatId = (typeof canvasFormats)[number]['id'];
@@ -61,18 +63,20 @@ export default function FormatCanvas({ assembled }: { assembled: boolean }) {
     >
       <div className="flex flex-wrap gap-2">
         {canvasFormats.map((f) => (
-          <button
+          <Button
             key={f.id}
             type="button"
+            size="sm"
+            variant="outline"
             onClick={() => setFormatId(f.id)}
-            className={`rounded-md border px-3 py-1.5 font-mono text-label-sm uppercase tracking-wider transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-              formatId === f.id
-                ? 'border-primary bg-primary/10 text-primary'
-                : 'border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground'
-            }`}
+            className={cn(
+              'rounded-md font-mono text-label-sm uppercase tracking-wider',
+              formatId === f.id &&
+                'border-primary bg-primary/10 text-primary hover:bg-primary/10',
+            )}
           >
             {f.label}
-          </button>
+          </Button>
         ))}
       </div>
 
