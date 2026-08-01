@@ -35,15 +35,7 @@ export default function HeroSection() {
         </div>
         <div className="relative mx-auto max-w-5xl">
           <div className="absolute -inset-4 rounded-3xl bg-primary/5 blur-3xl dark:bg-gradient-to-r dark:from-primary/20 dark:to-secondary/20 dark:blur-2xl" />
-          <div className="soft-card relative overflow-hidden rounded-2xl border border-outline-variant dark:border-white/10">
-            <img
-              src={hero.dashboardSrc}
-              alt={hero.dashboardAlt}
-              className="aspect-[16/9] w-full object-cover"
-              width={1280}
-              height={720}
-            />
-          </div>
+          <div className="soft-card relative aspect-[16/9] overflow-hidden rounded-2xl border border-outline-variant bg-surface-container dark:border-white/10" />
         </div>
       </div>
     </section>

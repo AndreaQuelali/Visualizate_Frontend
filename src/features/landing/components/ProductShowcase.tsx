@@ -13,10 +13,10 @@ export default function ProductShowcase() {
           {/* Celda alta */}
           <div className="soft-card row-span-2 overflow-hidden rounded-2xl bg-surface-container-low" />
 
-          {/* Celda media */}
+          {/* Celda media superior */}
           <div className="soft-card overflow-hidden rounded-2xl bg-surface-variant" />
 
-          {/* Celda media */}
+          {/* Celda media superior derecha */}
           <div className="soft-card overflow-hidden rounded-2xl bg-surface-container" />
 
           {/* Fila ancha */}
@@ -25,8 +25,11 @@ export default function ProductShowcase() {
           {/* Celda media */}
           <div className="soft-card overflow-hidden rounded-2xl bg-surface-variant" />
 
-          {/* Celda ancha inferior */}
-          <div className="soft-card col-span-2 overflow-hidden rounded-2xl bg-surface-container md:col-span-3" />
+          {/* Esquina inferior derecha */}
+          <div className="soft-card overflow-hidden rounded-2xl bg-surface-container" />
+
+          {/* Barra inferior ancha */}
+          <div className="soft-card col-span-2 overflow-hidden rounded-2xl bg-surface-container-low md:col-span-4" />
         </div>
       </div>
     </section>

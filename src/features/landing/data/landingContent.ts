@@ -84,14 +84,6 @@ export const howItWorks = [
   },
 ];
 
-export const logos = [
-  { src: '/landing/logo-1.png', alt: 'Logo de socio 1' },
-  { src: '/landing/logo-2.png', alt: 'Logo de socio 2' },
-  { src: '/landing/logo-3.png', alt: 'Logo de socio 3' },
-  { src: '/landing/logo-4.png', alt: 'Logo de socio 4' },
-  { src: '/landing/logo-5.png', alt: 'Logo de socio 5' },
-];
-
 export const benefits: {
   icon: LucideIcon;
   title: string;
@@ -233,7 +225,4 @@ export const hero = {
   titleAfter: ' automáticamente',
   subtitle:
     'Utiliza plantillas dinámicas inteligentes para escalar tu producción gráfica. Diseña una vez, genera miles de variaciones en segundos.',
-  dashboardSrc: '/landing/hero-dashboard.jpg',
-  dashboardAlt:
-    'Interfaz del dashboard de Visualizate con lienzo y plantilla dinámica',
 };
