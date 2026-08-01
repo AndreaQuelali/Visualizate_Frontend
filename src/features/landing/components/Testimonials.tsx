@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
 import { testimonials } from '../data/landingContent';
 import { useReveal } from '../hooks/useReveal';
 
@@ -42,15 +43,17 @@ export default function Testimonials() {
         </div>
         <div className="flex justify-center gap-2">
           {testimonials.map((_, i) => (
-            <button
+            <Button
               key={i}
               type="button"
+              variant="ghost"
+              size="icon-xs"
               aria-label={`Ver testimonio ${i + 1}`}
               onClick={() => setIndex(i)}
-              className={`h-2 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+              className={`min-w-0 rounded-full p-0 transition-all ${
                 i === index
-                  ? 'w-6 bg-secondary'
-                  : 'w-2 bg-border hover:bg-muted-foreground/40'
+                  ? 'h-2 w-6 bg-secondary hover:bg-secondary'
+                  : 'h-2 w-2 bg-border hover:bg-muted-foreground/40'
               }`}
             />
           ))}
