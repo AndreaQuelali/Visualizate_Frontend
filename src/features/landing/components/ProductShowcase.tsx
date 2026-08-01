@@ -1,35 +1,42 @@
+import { bentoCells } from '../data/landingContent';
+import { useReveal } from '../hooks/useReveal';
+
 export default function ProductShowcase() {
+  const [ref, visible] = useReveal<HTMLElement>();
+
   return (
-    <section className="overflow-hidden bg-background py-section-gap md:py-section-gap-lg">
+    <section
+      ref={ref}
+      className="overflow-hidden bg-background py-section-gap md:py-section-gap-lg"
+    >
       <div className="mx-auto max-w-container-max px-gutter">
-        <h2 className="mb-12 text-center text-headline-lg text-foreground md:mb-16">
-          Resultados de nivel profesional
-        </h2>
+        <div
+          className={`mb-12 md:mb-16 ${visible ? 'reveal is-visible' : 'reveal'}`}
+        >
+          <p className="mb-3 font-mono text-label-sm uppercase tracking-widest text-primary">
+            formatos
+          </p>
+          <h2 className="font-display text-headline-lg text-foreground md:text-headline-xl">
+            Resultados de nivel profesional
+          </h2>
+        </div>
 
         <div className="grid auto-rows-[140px] grid-cols-2 gap-3 sm:auto-rows-[160px] sm:gap-4 md:auto-rows-[180px] md:grid-cols-4 md:gap-5 lg:auto-rows-[200px]">
-          {/* Celda grande — hero visual */}
-          <div className="soft-card col-span-2 row-span-2 overflow-hidden rounded-2xl bg-surface-container md:col-span-2 md:row-span-2" />
-
-          {/* Celda alta */}
-          <div className="soft-card row-span-2 overflow-hidden rounded-2xl bg-surface-container-low" />
-
-          {/* Celda media superior */}
-          <div className="soft-card overflow-hidden rounded-2xl bg-surface-variant" />
-
-          {/* Celda media superior derecha */}
-          <div className="soft-card overflow-hidden rounded-2xl bg-surface-container" />
-
-          {/* Fila ancha */}
-          <div className="soft-card col-span-2 overflow-hidden rounded-2xl bg-surface-container-low md:col-span-2" />
-
-          {/* Celda media */}
-          <div className="soft-card overflow-hidden rounded-2xl bg-surface-variant" />
-
-          {/* Esquina inferior derecha */}
-          <div className="soft-card overflow-hidden rounded-2xl bg-surface-container" />
-
-          {/* Barra inferior ancha */}
-          <div className="soft-card col-span-2 overflow-hidden rounded-2xl bg-surface-container-low md:col-span-4" />
+          {bentoCells.map((cell, i) => (
+            <div
+              key={`${cell.label}-${i}`}
+              className={`soft-card relative overflow-hidden rounded-2xl ${cell.tone} ${cell.span} ${
+                visible ? 'reveal is-visible' : 'reveal'
+              }`}
+              style={{
+                transitionDelay: visible ? `${60 + i * 50}ms` : undefined,
+              }}
+            >
+              <span className="absolute bottom-3 left-3 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                {cell.label}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </section>

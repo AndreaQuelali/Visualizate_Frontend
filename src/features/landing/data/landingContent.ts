@@ -6,9 +6,6 @@ import {
   Users,
   FolderArchive,
   BadgeCheck,
-  Timer,
-  MousePointerClick,
-  TrendingUp,
 } from 'lucide-react';
 
 export const navLinks = [
@@ -18,7 +15,34 @@ export const navLinks = [
   { label: 'Precios', href: '#precios' },
 ] as const;
 
-export const features: {
+export const hero = {
+  eyebrow: 'producción visual · v2.0',
+  titleLine1: 'Diseña una vez.',
+  titleHighlight: 'Genera mil piezas.',
+  subtitle:
+    'Plantillas dinámicas que se llenan con tus datos. Un layout, cientos de variaciones listas para publicar.',
+};
+
+export const canvasFormats = [
+  { id: '1:1', label: '1:1', aspect: '1 / 1', spec: '1080×1080 · POST' },
+  { id: '4:5', label: '4:5', aspect: '4 / 5', spec: '1080×1350 · FEED' },
+  { id: '9:16', label: '9:16', aspect: '9 / 16', spec: '1080×1920 · STORY' },
+  { id: '16:9', label: '16:9', aspect: '16 / 9', spec: '1920×1080 · YT' },
+] as const;
+
+export const canvasLabels = [
+  {
+    key: 'titulo',
+    values: ['Meetup React', 'Webinar SaaS', 'Demo Day', 'Launch Party'],
+  },
+  { key: 'fecha', values: ['12 AGO', '03 SEP', '21 OCT', '05 NOV'] },
+  {
+    key: 'formato',
+    values: ['PNG · 2×', 'JPG · 4K', 'PDF · print', 'SVG · vector'],
+  },
+] as const;
+
+export const featuredFeatures: {
   icon: LucideIcon;
   title: string;
   description: string;
@@ -27,132 +51,149 @@ export const features: {
     icon: Sparkles,
     title: 'Plantillas dinámicas',
     description:
-      'Crea layouts que se adaptan automáticamente al contenido sin perder el balance visual.',
+      'Layouts que se reequilibran solos cuando cambia el texto, la imagen o el idioma. Diseñas la estructura una vez.',
   },
   {
     icon: Zap,
     title: 'Generación automática',
     description:
-      'Conecta tus fuentes de datos y genera cientos de piezas gráficas en un solo clic.',
-  },
-  {
-    icon: Calendar,
-    title: 'Gestión de eventos',
-    description:
-      'Organiza la producción visual de tus eventos recurrentes de forma centralizada.',
-  },
-  {
-    icon: Users,
-    title: 'Organización de equipos',
-    description:
-      'Roles personalizados y flujos de aprobación para equipos creativos modernos.',
-  },
-  {
-    icon: FolderArchive,
-    title: 'Biblioteca de assets',
-    description:
-      'Mantén tu marca consistente con un repositorio central de logos, fuentes y colores.',
-  },
-  {
-    icon: BadgeCheck,
-    title: 'Exportación Pro',
-    description:
-      'Exporta en múltiples formatos (PNG, JPG, PDF) con resolución optimizada para cada canal.',
+      'Conecta una hoja, un CSV o un formulario. Un clic y salen cientos de piezas listas para cada canal.',
   },
 ];
 
-export const howItWorks = [
-  {
-    step: 1,
-    title: 'Formulario',
-    description: 'Ingresa los datos, textos e imágenes de tu diseño.',
-  },
-  {
-    step: 2,
-    title: 'Plantilla',
-    description: 'Elige entre cientos de layouts optimizados para conversión.',
-  },
-  {
-    step: 3,
-    title: 'Generación',
-    description: 'La plataforma procesa y aplica el estilo en milisegundos.',
-  },
-  {
-    step: 4,
-    title: 'Descarga',
-    description: 'Obtén tu pieza gráfica en alta calidad lista para compartir.',
-  },
-];
-
-export const benefits: {
+export const compactFeatures: {
   icon: LucideIcon;
   title: string;
   description: string;
 }[] = [
   {
-    icon: Timer,
-    title: 'Ahorra tiempo',
-    description:
-      'Reduce en un 90% el tiempo dedicado a tareas repetitivas de diseño.',
+    icon: Calendar,
+    title: 'Gestión de eventos',
+    description: 'Producción visual centralizada para eventos recurrentes.',
   },
   {
-    icon: MousePointerClick,
-    title: 'Reduce errores',
-    description:
-      'Elimina los fallos humanos al automatizar la entrada de datos en los diseños.',
+    icon: Users,
+    title: 'Equipos y roles',
+    description: 'Aprobaciones y permisos para equipos creativos.',
   },
   {
-    icon: TrendingUp,
-    title: 'Escala la creación',
-    description:
-      'Genera contenido masivo para todas tus plataformas sin aumentar presupuesto.',
+    icon: FolderArchive,
+    title: 'Biblioteca de marca',
+    description: 'Logos, tipografías y colores en un solo lugar.',
+  },
+  {
+    icon: BadgeCheck,
+    title: 'Exportación Pro',
+    description: 'PNG, JPG y PDF optimizados por canal.',
   },
 ];
+
+export const howItWorks = [
+  {
+    step: '01',
+    title: 'datos',
+    description: 'Ingresa textos, imágenes y campos desde formulario o CSV.',
+  },
+  {
+    step: '02',
+    title: 'plantilla',
+    description: 'Elige un layout pensado para el formato que vas a publicar.',
+  },
+  {
+    step: '03',
+    title: 'generación',
+    description: 'Visualizate aplica estilo y composición en milisegundos.',
+  },
+  {
+    step: '04',
+    title: 'export',
+    description: 'Descarga en alta calidad, lista para cada red o canal.',
+  },
+];
+
+export const stats = [
+  {
+    value: '−90%',
+    label: 'Tiempo dedicado a diseño repetitivo',
+  },
+  {
+    value: '∞',
+    label: 'Variaciones por plantilla dinámica',
+  },
+  {
+    value: '0',
+    label: 'Errores de captura de datos',
+  },
+] as const;
+
+export const bentoCells = [
+  {
+    span: 'col-span-2 row-span-2',
+    label: '4:5 · FEED',
+    tone: 'bg-surface-container',
+  },
+  {
+    span: 'row-span-2',
+    label: '9:16 · STORY',
+    tone: 'bg-surface-container-low',
+  },
+  { span: '', label: '1:1 · POST', tone: 'bg-surface-variant' },
+  { span: '', label: '16:9 · YT', tone: 'bg-surface-container' },
+  {
+    span: 'col-span-2',
+    label: '3:1 · BANNER',
+    tone: 'bg-surface-container-low',
+  },
+  { span: '', label: '4:3 · SLIDE', tone: 'bg-surface-variant' },
+  { span: '', label: '1.6:1 · CARD', tone: 'bg-surface-container' },
+  {
+    span: 'col-span-2 md:col-span-4',
+    label: 'WIDE · COVER',
+    tone: 'bg-surface-container-low',
+  },
+] as const;
 
 export const useCases = [
   {
     title: 'Comunidades Tech',
     description:
-      'Flyers de eventos, certificados para alumnos y posts de redes sociales automáticos.',
+      'Flyers de eventos, certificados y posts de redes — generados desde la misma lista de asistencia.',
   },
   {
     title: 'Empresas B2B',
     description:
-      'Reportes visuales dinámicos, presentaciones y propuestas comerciales profesionales.',
+      'Reportes visuales, presentaciones y propuestas con datos que ya viven en tu CRM.',
   },
   {
-    title: 'Agencias Marketing',
+    title: 'Agencias',
     description:
-      'Escala la producción de anuncios pagados y contenido diario para múltiples clientes.',
+      'Escala anuncios y contenido diario para varios clientes sin multiplicar el equipo.',
   },
   {
-    title: 'Educación Online',
+    title: 'Educación online',
     description:
-      'Material didáctico, miniaturas para cursos y diplomas automáticos para egresados.',
+      'Miniaturas de cursos, material didáctico y diplomas automáticos al egresar.',
   },
 ];
 
 export const testimonials = [
   {
     quote:
-      'Visualizate ha transformado por completo cómo manejamos los anuncios de nuestra comunidad. Lo que antes tomaba horas ahora se hace en segundos.',
+      'Lo que antes tomaba horas de diseño ahora sale en segundos. Misma marca, mil variaciones.',
     name: 'Elena Rodriguez',
-    role: 'Community Lead @ TechHub',
-    avatar: '/landing/avatar-elena.jpg',
+    role: 'Community Lead · TechHub',
   },
   {
     quote:
-      'La calidad de las plantillas es excepcional. No parece contenido automatizado, tiene un toque humano y profesional increíble.',
+      'Las plantillas no se sienten automáticas. Tienen peso visual y coherencia de marca.',
     name: 'Marco Sanabria',
-    role: 'Creative Director @ FlowAgency',
-    avatar: '/landing/avatar-marco.jpg',
+    role: 'Creative Director · FlowAgency',
   },
   {
     quote:
-      'Es la herramienta definitiva para escalar contenido sin quemar al equipo de diseño. La integración con nuestros datos fue súper sencilla.',
+      'Escalamos contenido sin quemar al equipo. La integración con nuestros datos fue directa.',
     name: 'Andrés Vidal',
-    role: 'Founder @ SaaS Growth',
-    avatar: '/landing/avatar-andres.jpg',
+    role: 'Founder · SaaS Growth',
   },
 ];
 
@@ -163,9 +204,9 @@ export const pricingPlans = [
     period: '/mes',
     featured: false,
     features: [
-      { label: '5 piezas al mes', included: true },
+      { label: '5 piezas / mes', included: true },
       { label: 'Plantillas básicas', included: true },
-      { label: 'Exportación 4K', included: false },
+      { label: 'Export 4K', included: false },
     ],
     cta: 'Empezar ahora',
     to: '/register',
@@ -175,11 +216,11 @@ export const pricingPlans = [
     price: '$29',
     period: '/mes',
     featured: true,
-    badge: 'Recomendado',
+    badge: 'recomendado',
     features: [
       { label: 'Piezas ilimitadas', included: true },
-      { label: 'Todas las plantillas Pro', included: true },
-      { label: 'Exportación 4K y Vector', included: true },
+      { label: 'Plantillas Pro', included: true },
+      { label: 'Export 4K + vector', included: true },
       { label: 'Soporte prioritario', included: true },
     ],
     cta: 'Comenzar Pro',
@@ -191,9 +232,9 @@ export const pricingPlans = [
     period: '',
     featured: false,
     features: [
-      { label: 'SSO y seguridad Pro', included: true },
-      { label: 'API de marca blanca', included: true },
-      { label: 'Account Manager', included: true },
+      { label: 'SSO y seguridad', included: true },
+      { label: 'API marca blanca', included: true },
+      { label: 'Account manager', included: true },
     ],
     cta: 'Contactar ventas',
     to: '/register',
@@ -204,25 +245,16 @@ export const faqs = [
   {
     question: '¿Puedo usar mis propias fuentes y logos?',
     answer:
-      'Sí, en los planes Pro y Enterprise puedes subir todo el kit de marca de tu empresa para que Visualizate mantenga la coherencia visual en cada diseño generado.',
+      'Sí. En Pro y Enterprise subes el kit de marca completo para que cada pieza mantenga tipografía, color y logos.',
   },
   {
-    question: '¿Cómo funciona la integración de datos?',
+    question: '¿Cómo entra la data?',
     answer:
-      'Puedes importar datos desde hojas de cálculo (CSV, Excel), conectar via API o usar nuestros formularios integrados para cargar la información.',
+      'CSV, Excel, API o formularios integrados. Tú eliges la fuente; Visualizate aplica la plantilla.',
   },
   {
-    question: '¿Hay un límite de exportación?',
+    question: '¿Hay límite de exportación?',
     answer:
-      'El plan gratuito tiene un límite de 5 piezas mensuales. El plan Pro ofrece exportaciones ilimitadas en alta calidad.',
+      'El plan gratis: 5 piezas al mes. Pro: exportaciones ilimitadas en alta calidad.',
   },
 ];
-
-export const hero = {
-  badge: 'Lanzamiento V2.0',
-  titleBefore: 'Convierte datos en ',
-  titleHighlight: 'contenido visual',
-  titleAfter: ' automáticamente',
-  subtitle:
-    'Utiliza plantillas dinámicas inteligentes para escalar tu producción gráfica. Diseña una vez, genera miles de variaciones en segundos.',
-};

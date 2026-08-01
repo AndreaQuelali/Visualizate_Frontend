@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { navLinks } from '../data/landingContent';
 import ThemeToggle from './ThemeToggle';
 
 export default function LandingNav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [active, setActive] = useState('#');
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -16,11 +17,7 @@ export default function LandingNav() {
   }, []);
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
@@ -28,25 +25,31 @@ export default function LandingNav() {
 
   return (
     <nav
-      className={`fixed top-0 z-50 h-20 w-full border-b border-outline-variant/60 backdrop-blur-xl transition-all duration-200 ${
-        scrolled ? 'bg-card/95 shadow-md' : 'bg-card/80 dark:bg-background/80'
+      className={`fixed top-0 z-50 h-16 w-full border-b backdrop-blur-xl transition-all duration-200 md:h-20 ${
+        scrolled
+          ? 'border-border bg-background/90 shadow-sm'
+          : 'border-transparent bg-background/70'
       }`}
     >
       <div className="mx-auto flex h-full max-w-container-max items-center justify-between px-gutter">
         <div className="flex items-center gap-8 md:gap-10">
-          <a href="#" className="text-headline-md font-bold text-foreground">
+          <a
+            href="#"
+            className="font-display text-xl font-bold tracking-tight text-foreground"
+          >
             Visualizate
           </a>
-          <div className="hidden items-center gap-6 md:flex md:gap-8">
-            {navLinks.map((link, i) => (
+          <div className="hidden items-center gap-6 md:flex">
+            {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className={
-                  i === 0
-                    ? 'border-b-2 border-primary pb-1 text-body-md font-semibold text-primary'
-                    : 'text-body-md font-medium text-muted-foreground transition-colors hover:text-primary'
-                }
+                onClick={() => setActive(link.href)}
+                className={`font-mono text-label-sm uppercase tracking-wider transition-colors ${
+                  active === link.href
+                    ? 'border-b border-primary pb-0.5 text-primary'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
               >
                 {link.label}
               </a>
@@ -54,17 +57,17 @@ export default function LandingNav() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-2 sm:gap-3">
           <ThemeToggle />
           <Link
             to="/login"
-            className="hidden text-body-md font-medium text-muted-foreground transition-colors hover:text-primary md:block"
+            className="hidden font-mono text-label-sm uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground md:block"
           >
             Iniciar sesión
           </Link>
           <Link
             to="/register"
-            className="rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-md transition-opacity hover:opacity-90 sm:px-6 sm:rounded-full"
+            className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 sm:px-5"
           >
             Comenzar gratis
           </Link>
@@ -84,21 +87,24 @@ export default function LandingNav() {
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-border bg-card px-gutter py-6 md:hidden">
+        <div className="border-t border-border bg-background px-gutter py-6 md:hidden">
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-body-md font-medium text-foreground"
-                onClick={() => setMobileOpen(false)}
+                className="font-mono text-label-sm uppercase tracking-wider text-foreground"
+                onClick={() => {
+                  setActive(link.href);
+                  setMobileOpen(false);
+                }}
               >
                 {link.label}
               </a>
             ))}
             <Link
               to="/login"
-              className="text-body-md font-medium text-primary"
+              className="font-mono text-label-sm uppercase tracking-wider text-primary"
               onClick={() => setMobileOpen(false)}
             >
               Iniciar sesión

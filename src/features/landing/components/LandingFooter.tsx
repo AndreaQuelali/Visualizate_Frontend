@@ -2,27 +2,29 @@ export default function LandingFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="w-full border-t border-outline-variant bg-card py-16">
-      <div className="mx-auto grid max-w-container-max grid-cols-2 gap-12 px-gutter md:grid-cols-4">
+    <footer className="w-full border-t border-border bg-background py-14">
+      <div className="mx-auto grid max-w-container-max grid-cols-2 gap-10 px-gutter md:grid-cols-4">
         <div className="col-span-2 md:col-span-1">
           <a
             href="#"
-            className="mb-6 block text-headline-md font-bold text-foreground"
+            className="mb-4 block font-display text-xl font-bold text-foreground"
           >
             Visualizate
           </a>
-          <p className="pr-10 text-sm leading-relaxed text-muted-foreground">
-            La plataforma líder en automatización creativa para equipos modernos
-            y comunidades digitales.
+          <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
+            Automatización creativa para equipos y comunidades que producen
+            contenido visual a escala.
           </p>
         </div>
         <div>
-          <h5 className="mb-6 font-bold text-foreground">Producto</h5>
-          <ul className="space-y-4">
+          <h5 className="mb-4 font-mono text-label-sm uppercase tracking-widest text-muted-foreground">
+            Producto
+          </h5>
+          <ul className="space-y-3 text-sm">
             <li>
               <a
                 href="#caracteristicas"
-                className="text-muted-foreground transition-colors hover:text-primary"
+                className="text-foreground/80 hover:text-primary"
               >
                 Características
               </a>
@@ -30,15 +32,15 @@ export default function LandingFooter() {
             <li>
               <a
                 href="#como-funciona"
-                className="text-muted-foreground transition-colors hover:text-primary"
+                className="text-foreground/80 hover:text-primary"
               >
-                Plantillas
+                Cómo funciona
               </a>
             </li>
             <li>
               <a
                 href="#precios"
-                className="text-muted-foreground transition-colors hover:text-primary"
+                className="text-foreground/80 hover:text-primary"
               >
                 Precios
               </a>
@@ -46,33 +48,27 @@ export default function LandingFooter() {
           </ul>
         </div>
         <div>
-          <h5 className="mb-6 font-bold text-foreground">Compañía</h5>
-          <ul className="space-y-4">
-            <li>
-              <span className="text-muted-foreground">Acerca de</span>
-            </li>
-            <li>
-              <span className="text-muted-foreground">Blog</span>
-            </li>
-            <li>
-              <span className="text-muted-foreground">Contacto</span>
-            </li>
+          <h5 className="mb-4 font-mono text-label-sm uppercase tracking-widest text-muted-foreground">
+            Compañía
+          </h5>
+          <ul className="space-y-3 text-sm text-muted-foreground">
+            <li>Acerca de</li>
+            <li>Blog</li>
+            <li>Contacto</li>
           </ul>
         </div>
         <div>
-          <h5 className="mb-6 font-bold text-foreground">Legal</h5>
-          <ul className="space-y-4">
-            <li>
-              <span className="text-muted-foreground">Privacidad</span>
-            </li>
-            <li>
-              <span className="text-muted-foreground">Términos</span>
-            </li>
+          <h5 className="mb-4 font-mono text-label-sm uppercase tracking-widest text-muted-foreground">
+            Legal
+          </h5>
+          <ul className="space-y-3 text-sm text-muted-foreground">
+            <li>Privacidad</li>
+            <li>Términos</li>
           </ul>
         </div>
       </div>
-      <div className="mx-auto mt-20 max-w-container-max border-t border-outline-variant px-gutter pt-8 text-center text-sm text-muted-foreground">
-        © {year} Visualizate. Todos los derechos reservados.
+      <div className="mx-auto mt-12 max-w-container-max border-t border-border px-gutter pt-6 font-mono text-label-sm text-muted-foreground">
+        © {year} Visualizate · todos los derechos reservados
       </div>
     </footer>
   );
