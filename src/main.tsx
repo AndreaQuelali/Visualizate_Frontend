@@ -3,7 +3,11 @@ import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './routes';
+import { useThemeStore } from './store/themeStore';
 import './index.css';
+
+// Initialize theme store (applies class from localStorage)
+useThemeStore.getState();
 
 const queryClient = new QueryClient();
 

@@ -35,9 +35,9 @@ export default function CheckEmailDetail() {
       {/* Icon Section */}
       <div className="relative mb-8 flex justify-center">
         {/* Soft atmospheric glow circles */}
-        <div className="w-32 h-32 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 rounded-full bg-[#4648d4] animate-pulse"></div>
+        <div className="w-32 h-32 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 rounded-full bg-primary animate-pulse"></div>
         <div className="w-24 h-24 bg-[#6063ee]/10 rounded-full flex items-center justify-center relative z-10 animate-bounce-slow">
-          <div className="w-20 h-20 bg-[#4648d4] rounded-full flex items-center justify-center shadow-lg shadow-[#4648d4]/30">
+          <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-primary/30">
             <Mail className="text-white w-10 h-10" />
           </div>
         </div>
@@ -76,7 +76,7 @@ export default function CheckEmailDetail() {
             </>
           ) : isLoading ? (
             <>
-              <RefreshCw className="w-4 h-4 animate-spin text-[#4648d4]" />
+              <RefreshCw className="w-4 h-4 animate-spin text-primary" />
               <span>Enviando enlace...</span>
             </>
           ) : (
@@ -93,7 +93,7 @@ export default function CheckEmailDetail() {
           </p>
           <Link
             to="/register"
-            className="text-[#4648d4] text-xs font-semibold hover:underline decoration-2 underline-offset-4 transition-all"
+            className="text-primary text-xs font-semibold hover:underline decoration-2 underline-offset-4 transition-all"
           >
             Cambiar dirección de correo electrónico
           </Link>
