@@ -10,9 +10,13 @@ import NewPasswordForm from '../features/auth/components/NewPasswordForm';
 import VerifyEmailDetail from '../features/auth/components/VerifyEmailDetail';
 import ProfileForm from '../features/auth/components/ProfileForm';
 import DashboardPage from '../features/dashboard/DashboardPage';
+import LandingPage from '../features/landing/LandingPage';
 
 export const router = createBrowserRouter([
-  // Rutas de Autenticación
+  {
+    path: '/',
+    element: <LandingPage />,
+  },
   {
     path: '/',
     element: <AuthLayout />,
@@ -25,12 +29,10 @@ export const router = createBrowserRouter([
       { path: 'verify-email', element: <VerifyEmailDetail /> },
     ],
   },
-  // Rutas Privadas
   {
     path: '/',
     element: <ProtectedRoute />,
     children: [
-      { index: true, element: <Navigate to="/dashboard" replace /> },
       { path: 'dashboard', element: <DashboardPage /> },
       {
         path: '',
@@ -39,7 +41,6 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  // Redirección wildcard
   {
     path: '*',
     element: <Navigate to="/" replace />,

@@ -140,7 +140,7 @@ export default function ProfileForm() {
               <input
                 id="fullName"
                 type="text"
-                className={`w-full px-3 py-2 pl-10 rounded-lg border bg-[#f3f4f5] dark:bg-muted text-foreground focus:outline-none focus:ring-2 focus:ring-[#4648d4]/10 focus:border-[#4648d4] transition-all text-sm ${
+                className={`w-full px-3 py-2 pl-10 rounded-lg border bg-[#f3f4f5] dark:bg-muted text-foreground focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all text-sm ${
                   errors.fullName ? 'border-destructive' : 'border-border'
                 }`}
                 {...register('fullName')}
@@ -166,7 +166,7 @@ export default function ProfileForm() {
               <input
                 id="email"
                 type="email"
-                className={`w-full px-3 py-2 pl-10 rounded-lg border bg-[#f3f4f5] dark:bg-muted text-foreground focus:outline-none focus:ring-2 focus:ring-[#4648d4]/10 focus:border-[#4648d4] transition-all text-sm ${
+                className={`w-full px-3 py-2 pl-10 rounded-lg border bg-[#f3f4f5] dark:bg-muted text-foreground focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all text-sm ${
                   errors.email ? 'border-destructive' : 'border-border'
                 }`}
                 {...register('email')}
@@ -202,7 +202,7 @@ export default function ProfileForm() {
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Dejar en blanco si no deseas cambiarla"
-                className={`w-full px-3 py-2 pl-3 pr-10 rounded-lg border bg-[#f3f4f5] dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#4648d4]/10 focus:border-[#4648d4] transition-all text-sm ${
+                className={`w-full px-3 py-2 pl-3 pr-10 rounded-lg border bg-[#f3f4f5] dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all text-sm ${
                   errors.password ? 'border-destructive' : 'border-border'
                 }`}
                 {...register('password')}
@@ -232,7 +232,7 @@ export default function ProfileForm() {
           <button
             type="submit"
             disabled={isLoading}
-            className="flex items-center justify-center gap-2 bg-[#4648d4] text-white hover:bg-[#4648d4]/90 active:scale-[0.98] transition-all py-2 px-6 rounded-lg text-sm font-bold shadow-md shadow-[#4648d4]/15 disabled:opacity-75"
+            className="flex items-center justify-center gap-2 bg-primary text-white hover:bg-primary/90 active:scale-[0.98] transition-all py-2 px-6 rounded-lg text-sm font-bold shadow-md shadow-primary/15 disabled:opacity-75"
           >
             {isLoading ? (
               <>

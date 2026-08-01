@@ -67,7 +67,7 @@ export default function LoginForm() {
     <div className="w-full max-w-[440px] z-10 animate-fade-in">
       {/* Cabecera de marca */}
       <div className="flex flex-col items-center mb-8">
-        <div className="w-12 h-12 bg-[#4648d4] rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-[#4648d4]/20 text-white">
+        <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-primary/20 text-white">
           <svg
             className="w-7 h-7"
             viewBox="0 0 24 24"
@@ -82,7 +82,7 @@ export default function LoginForm() {
             />
           </svg>
         </div>
-        <h2 className="font-sans text-2xl font-bold text-[#4648d4] tracking-tight">
+        <h2 className="font-sans text-2xl font-bold text-primary tracking-tight">
           Visualizate
         </h2>
       </div>
@@ -118,7 +118,7 @@ export default function LoginForm() {
                 id="email"
                 type="email"
                 placeholder="nombre@empresa.com"
-                className={`w-full px-3 py-2 pl-10 rounded-lg border bg-[#f3f4f5] dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#4648d4]/10 focus:border-[#4648d4] transition-all text-sm ${
+                className={`w-full px-3 py-2 pl-10 rounded-lg border bg-[#f3f4f5] dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all text-sm ${
                   errors.email ? 'border-destructive' : 'border-border'
                 }`}
                 {...register('email')}
@@ -143,7 +143,7 @@ export default function LoginForm() {
               </label>
               <Link
                 to="/reset-password"
-                className="text-xs font-semibold text-[#4648d4] hover:underline transition-all"
+                className="text-xs font-semibold text-primary hover:underline transition-all"
               >
                 ¿Olvidaste tu contraseña?
               </Link>
@@ -153,7 +153,7 @@ export default function LoginForm() {
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 placeholder="••••••••"
-                className={`w-full px-3 py-2 pl-3 pr-10 rounded-lg border bg-[#f3f4f5] dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#4648d4]/10 focus:border-[#4648d4] transition-all text-sm ${
+                className={`w-full px-3 py-2 pl-3 pr-10 rounded-lg border bg-[#f3f4f5] dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all text-sm ${
                   errors.password ? 'border-destructive' : 'border-border'
                 }`}
                 {...register('password')}
@@ -182,7 +182,7 @@ export default function LoginForm() {
             <input
               id="remember"
               type="checkbox"
-              className="w-4 h-4 rounded border-border text-[#4648d4] focus:ring-[#4648d4] focus:ring-offset-background"
+              className="w-4 h-4 rounded border-border text-primary focus:ring-primary focus:ring-offset-background"
               {...register('remember')}
             />
             <label
@@ -197,7 +197,7 @@ export default function LoginForm() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-[#4648d4] text-white py-2.5 rounded-lg shadow-sm hover:bg-[#4648d4]/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 text-sm font-semibold disabled:opacity-75 disabled:cursor-not-allowed"
+            className="w-full bg-primary text-white py-2.5 rounded-lg shadow-sm hover:bg-primary/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 text-sm font-semibold disabled:opacity-75 disabled:cursor-not-allowed"
           >
             {isLoading ? (
               <>
@@ -249,7 +249,7 @@ export default function LoginForm() {
             ¿No tienes una cuenta?{' '}
             <Link
               to="/register"
-              className="text-[#4648d4] font-semibold hover:underline transition-all"
+              className="text-primary font-semibold hover:underline transition-all"
             >
               Regístrate
             </Link>
@@ -259,10 +259,10 @@ export default function LoginForm() {
 
       {/* Enlaces del Pie */}
       <div className="mt-6 flex justify-center gap-4 text-xs text-muted-foreground">
-        <a href="#" className="hover:text-[#4648d4] transition-colors">
+        <a href="#" className="hover:text-primary transition-colors">
           Política de privacidad
         </a>
-        <a href="#" className="hover:text-[#4648d4] transition-colors">
+        <a href="#" className="hover:text-primary transition-colors">
           Términos de servicio
         </a>
       </div>

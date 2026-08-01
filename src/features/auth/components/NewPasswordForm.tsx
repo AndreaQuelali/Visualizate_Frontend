@@ -135,7 +135,7 @@ export default function NewPasswordForm() {
       {/* Cabecera de marca */}
       {!isSuccess && (
         <div className="flex justify-center mb-6">
-          <span className="font-sans text-xl font-bold text-[#4648d4] tracking-tight">
+          <span className="font-sans text-xl font-bold text-primary tracking-tight">
             Visualizate
           </span>
         </div>
@@ -144,8 +144,8 @@ export default function NewPasswordForm() {
       {/* Tarjeta */}
       {isSuccess ? (
         <div className="bg-white dark:bg-card border border-border p-8 rounded-xl shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1)] text-center flex flex-col items-center gap-6">
-          <div className="w-16 h-16 bg-[#4648d4]/10 rounded-full flex items-center justify-center">
-            <CheckCircle className="w-10 h-10 text-[#4648d4] fill-[#4648d4]/10" />
+          <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+            <CheckCircle className="w-10 h-10 text-primary fill-primary/10" />
           </div>
           <div className="space-y-2">
             <h2 className="font-sans text-2xl font-bold text-foreground">
@@ -158,7 +158,7 @@ export default function NewPasswordForm() {
           </div>
           <Link
             to="/login"
-            className="w-full bg-[#4648d4] text-white py-2.5 rounded-lg text-sm font-semibold shadow-sm hover:bg-[#4648d4]/90 active:scale-[0.98] transition-all flex items-center justify-center"
+            className="w-full bg-primary text-white py-2.5 rounded-lg text-sm font-semibold shadow-sm hover:bg-primary/90 active:scale-[0.98] transition-all flex items-center justify-center"
           >
             Ir al inicio de sesión
           </Link>
@@ -201,7 +201,7 @@ export default function NewPasswordForm() {
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Introduce la nueva contraseña"
-                  className={`w-full px-3 py-2 pl-3 pr-10 rounded-lg border bg-[#f3f4f5] dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#4648d4]/10 focus:border-[#4648d4] transition-all text-sm ${
+                  className={`w-full px-3 py-2 pl-3 pr-10 rounded-lg border bg-[#f3f4f5] dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all text-sm ${
                     errors.password ? 'border-destructive' : 'border-border'
                   }`}
                   {...register('password')}
@@ -261,7 +261,7 @@ export default function NewPasswordForm() {
                   id="confirmPassword"
                   type={showConfirmPassword ? 'text' : 'password'}
                   placeholder="Repite la nueva contraseña"
-                  className={`w-full px-3 py-2 pl-3 pr-10 rounded-lg border bg-[#f3f4f5] dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#4648d4]/10 focus:border-[#4648d4] transition-all text-sm ${
+                  className={`w-full px-3 py-2 pl-3 pr-10 rounded-lg border bg-[#f3f4f5] dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all text-sm ${
                     errors.confirmPassword
                       ? 'border-destructive'
                       : 'border-border'
@@ -291,7 +291,7 @@ export default function NewPasswordForm() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-[#4648d4] text-white font-semibold py-2.5 rounded-lg hover:bg-[#4648d4]/90 active:scale-[0.98] mt-4 transition-all shadow-lg shadow-[#4648d4]/20 flex items-center justify-center gap-2 text-sm disabled:opacity-75"
+              className="w-full bg-primary text-white font-semibold py-2.5 rounded-lg hover:bg-primary/90 active:scale-[0.98] mt-4 transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 text-sm disabled:opacity-75"
             >
               {isLoading ? (
                 <>

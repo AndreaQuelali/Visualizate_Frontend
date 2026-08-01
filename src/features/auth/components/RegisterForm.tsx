@@ -109,7 +109,7 @@ export default function RegisterForm() {
     <div className="w-full max-w-[480px] z-10 animate-fade-in my-6">
       {/* Cabecera de marca */}
       <div className="flex flex-col items-center mb-6">
-        <div className="w-12 h-12 bg-[#4648d4] rounded-xl flex items-center justify-center mb-3 shadow-lg shadow-[#4648d4]/20 text-white">
+        <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center mb-3 shadow-lg shadow-primary/20 text-white">
           <svg
             className="w-6 h-6"
             viewBox="0 0 24 24"
@@ -124,7 +124,7 @@ export default function RegisterForm() {
             />
           </svg>
         </div>
-        <h2 className="font-sans text-xl font-bold text-[#4648d4] tracking-tight">
+        <h2 className="font-sans text-xl font-bold text-primary tracking-tight">
           Visualizate
         </h2>
       </div>
@@ -160,7 +160,7 @@ export default function RegisterForm() {
                 id="fullName"
                 type="text"
                 placeholder="Alex Johnson"
-                className={`w-full px-3 py-2 pl-10 rounded-lg border bg-white dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#4648d4]/10 focus:border-[#4648d4] transition-all text-sm ${
+                className={`w-full px-3 py-2 pl-10 rounded-lg border bg-white dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all text-sm ${
                   errors.fullName ? 'border-destructive' : 'border-border'
                 }`}
                 {...register('fullName')}
@@ -187,7 +187,7 @@ export default function RegisterForm() {
                 id="email"
                 type="email"
                 placeholder="nombre@empresa.com"
-                className={`w-full px-3 py-2 pl-10 rounded-lg border bg-white dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#4648d4]/10 focus:border-[#4648d4] transition-all text-sm ${
+                className={`w-full px-3 py-2 pl-10 rounded-lg border bg-white dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all text-sm ${
                   errors.email ? 'border-destructive' : 'border-border'
                 }`}
                 {...register('email')}
@@ -214,7 +214,7 @@ export default function RegisterForm() {
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 placeholder="••••••••"
-                className={`w-full px-3 py-2 pl-10 pr-10 rounded-lg border bg-white dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#4648d4]/10 focus:border-[#4648d4] transition-all text-sm ${
+                className={`w-full px-3 py-2 pl-10 pr-10 rounded-lg border bg-white dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all text-sm ${
                   errors.password ? 'border-destructive' : 'border-border'
                 }`}
                 {...register('password')}
@@ -245,42 +245,42 @@ export default function RegisterForm() {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1">
                 <div
-                  className={`flex items-center gap-1.5 text-xs transition-colors ${checks.min ? 'text-[#4648d4]' : 'text-muted-foreground'}`}
+                  className={`flex items-center gap-1.5 text-xs transition-colors ${checks.min ? 'text-primary' : 'text-muted-foreground'}`}
                 >
                   <CheckCircle
-                    className={`w-3.5 h-3.5 ${checks.min ? 'fill-[#4648d4] text-white' : ''}`}
+                    className={`w-3.5 h-3.5 ${checks.min ? 'fill-primary text-white' : ''}`}
                   />
                   <span>Mínimo 8 caracteres</span>
                 </div>
                 <div
-                  className={`flex items-center gap-1.5 text-xs transition-colors ${checks.upper ? 'text-[#4648d4]' : 'text-muted-foreground'}`}
+                  className={`flex items-center gap-1.5 text-xs transition-colors ${checks.upper ? 'text-primary' : 'text-muted-foreground'}`}
                 >
                   <CheckCircle
-                    className={`w-3.5 h-3.5 ${checks.upper ? 'fill-[#4648d4] text-white' : ''}`}
+                    className={`w-3.5 h-3.5 ${checks.upper ? 'fill-primary text-white' : ''}`}
                   />
                   <span>Letra mayúscula</span>
                 </div>
                 <div
-                  className={`flex items-center gap-1.5 text-xs transition-colors ${checks.lower ? 'text-[#4648d4]' : 'text-muted-foreground'}`}
+                  className={`flex items-center gap-1.5 text-xs transition-colors ${checks.lower ? 'text-primary' : 'text-muted-foreground'}`}
                 >
                   <CheckCircle
-                    className={`w-3.5 h-3.5 ${checks.lower ? 'fill-[#4648d4] text-white' : ''}`}
+                    className={`w-3.5 h-3.5 ${checks.lower ? 'fill-primary text-white' : ''}`}
                   />
                   <span>Letra minúscula</span>
                 </div>
                 <div
-                  className={`flex items-center gap-1.5 text-xs transition-colors ${checks.num ? 'text-[#4648d4]' : 'text-muted-foreground'}`}
+                  className={`flex items-center gap-1.5 text-xs transition-colors ${checks.num ? 'text-primary' : 'text-muted-foreground'}`}
                 >
                   <CheckCircle
-                    className={`w-3.5 h-3.5 ${checks.num ? 'fill-[#4648d4] text-white' : ''}`}
+                    className={`w-3.5 h-3.5 ${checks.num ? 'fill-primary text-white' : ''}`}
                   />
                   <span>Un número</span>
                 </div>
                 <div
-                  className={`flex items-center gap-1.5 text-xs transition-colors ${checks.special ? 'text-[#4648d4]' : 'text-muted-foreground'}`}
+                  className={`flex items-center gap-1.5 text-xs transition-colors ${checks.special ? 'text-primary' : 'text-muted-foreground'}`}
                 >
                   <CheckCircle
-                    className={`w-3.5 h-3.5 ${checks.special ? 'fill-[#4648d4] text-white' : ''}`}
+                    className={`w-3.5 h-3.5 ${checks.special ? 'fill-primary text-white' : ''}`}
                   />
                   <span>Carácter especial</span>
                 </div>
@@ -301,7 +301,7 @@ export default function RegisterForm() {
                 id="confirmPassword"
                 type="password"
                 placeholder="••••••••"
-                className={`w-full px-3 py-2 pl-10 rounded-lg border bg-white dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#4648d4]/10 focus:border-[#4648d4] transition-all text-sm ${
+                className={`w-full px-3 py-2 pl-10 rounded-lg border bg-white dark:bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all text-sm ${
                   errors.confirmPassword
                     ? 'border-destructive'
                     : 'border-border'
@@ -323,7 +323,7 @@ export default function RegisterForm() {
               <input
                 id="terms"
                 type="checkbox"
-                className="w-4 h-4 rounded mt-0.5 border-border text-[#4648d4] focus:ring-[#4648d4]"
+                className="w-4 h-4 rounded mt-0.5 border-border text-primary focus:ring-primary"
                 {...register('terms')}
               />
               <label
@@ -333,14 +333,14 @@ export default function RegisterForm() {
                 Acepto los{' '}
                 <a
                   href="#"
-                  className="text-[#4648d4] font-medium hover:underline"
+                  className="text-primary font-medium hover:underline"
                 >
                   Términos de servicio
                 </a>{' '}
                 y la{' '}
                 <a
                   href="#"
-                  className="text-[#4648d4] font-medium hover:underline"
+                  className="text-primary font-medium hover:underline"
                 >
                   Política de privacidad
                 </a>
@@ -358,7 +358,7 @@ export default function RegisterForm() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-2.5 bg-[#4648d4] text-white text-sm font-semibold rounded-lg shadow-lg shadow-[#4648d4]/20 hover:bg-[#4648d4]/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-75 disabled:cursor-not-allowed"
+            className="w-full py-2.5 bg-primary text-white text-sm font-semibold rounded-lg shadow-lg shadow-primary/20 hover:bg-primary/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-75 disabled:cursor-not-allowed"
           >
             {isLoading ? (
               <>
@@ -404,7 +404,7 @@ export default function RegisterForm() {
             ¿Ya tienes una cuenta?{' '}
             <Link
               to="/login"
-              className="text-[#4648d4] font-semibold hover:underline transition-all"
+              className="text-primary font-semibold hover:underline transition-all"
             >
               Inicia sesión
             </Link>
