@@ -48,6 +48,17 @@ export default {
         'outline-variant': 'var(--outline-variant)',
         'on-primary-fixed-variant': 'var(--on-primary-fixed-variant)',
       },
+      fontFamily: {
+        sans: ['Geist Variable', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: [
+          'Fraunces Variable',
+          'ui-serif',
+          'Georgia',
+          'Cambria',
+          'serif',
+        ],
+        mono: ['Geist Variable', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
@@ -63,24 +74,24 @@ export default {
       },
       fontSize: {
         'display-hero': [
-          '72px',
-          { lineHeight: '80px', letterSpacing: '-0.04em', fontWeight: '700' },
+          '64px',
+          { lineHeight: '1.05', letterSpacing: '-0.04em', fontWeight: '700' },
         ],
         'display-hero-mobile': [
           '40px',
-          { lineHeight: '48px', letterSpacing: '-0.02em', fontWeight: '700' },
+          { lineHeight: '1.1', letterSpacing: '-0.03em', fontWeight: '700' },
         ],
         'headline-xl': [
           '40px',
-          { lineHeight: '48px', letterSpacing: '-0.02em', fontWeight: '700' },
+          { lineHeight: '1.15', letterSpacing: '-0.03em', fontWeight: '700' },
         ],
         'headline-lg': [
           '32px',
-          { lineHeight: '40px', letterSpacing: '-0.02em', fontWeight: '600' },
+          { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: '600' },
         ],
         'headline-md': [
           '24px',
-          { lineHeight: '32px', letterSpacing: '-0.01em', fontWeight: '600' },
+          { lineHeight: '1.25', letterSpacing: '-0.015em', fontWeight: '600' },
         ],
         'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
         'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
@@ -91,8 +102,11 @@ export default {
         ],
         'label-sm': [
           '12px',
-          { lineHeight: '16px', letterSpacing: '0.02em', fontWeight: '600' },
+          { lineHeight: '16px', letterSpacing: '0.04em', fontWeight: '500' },
         ],
+      },
+      transitionTimingFunction: {
+        spring: 'cubic-bezier(0.22, 1, 0.36, 1)',
       },
     },
   },

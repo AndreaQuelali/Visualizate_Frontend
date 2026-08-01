@@ -1,61 +1,76 @@
 import { Link } from 'react-router-dom';
-import { CheckCircle2, XCircle } from 'lucide-react';
+import { Check, Minus } from 'lucide-react';
 import { pricingPlans } from '../data/landingContent';
+import { useReveal } from '../hooks/useReveal';
 
 export default function PricingPreview() {
+  const [ref, visible] = useReveal<HTMLElement>();
+
   return (
     <section
       id="precios"
+      ref={ref}
       className="bg-background py-section-gap md:py-section-gap-lg"
     >
       <div className="mx-auto max-w-container-max px-gutter">
-        <div className="mb-16 text-center">
-          <h2 className="text-headline-lg text-foreground">
+        <div
+          className={`mb-12 text-center md:mb-16 ${
+            visible ? 'reveal is-visible' : 'reveal'
+          }`}
+        >
+          <p className="mb-3 font-mono text-label-sm uppercase tracking-widest text-primary">
+            planes
+          </p>
+          <h2 className="font-display text-headline-lg text-foreground md:text-headline-xl">
             Planes para todos los tamaños
           </h2>
         </div>
-        <div className="grid grid-cols-1 items-stretch gap-8 md:grid-cols-3">
-          {pricingPlans.map((plan) => (
+
+        <div className="grid grid-cols-1 items-stretch gap-5 md:grid-cols-3">
+          {pricingPlans.map((plan, i) => (
             <div
               key={plan.name}
-              className={`relative flex flex-col rounded-2xl bg-card p-10 shadow-sm ${
+              className={`relative flex flex-col rounded-2xl bg-card p-8 ${
                 plan.featured
-                  ? 'scale-100 border-2 border-primary shadow-xl shadow-primary/10 md:scale-105'
-                  : 'border border-outline-variant'
-              }`}
+                  ? 'border-2 border-primary shadow-lg shadow-primary/10'
+                  : 'border border-border'
+              } ${visible ? 'reveal is-visible' : 'reveal'}`}
+              style={{
+                transitionDelay: visible ? `${80 + i * 70}ms` : undefined,
+              }}
             >
               {plan.featured && plan.badge && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary-foreground">
+                <span className="absolute -top-3 left-6 rounded-full bg-secondary px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-secondary-foreground">
                   {plan.badge}
-                </div>
+                </span>
               )}
-              <h3 className="mb-2 text-2xl font-bold text-foreground">
+              <h3 className="mb-1 font-display text-xl font-semibold text-foreground">
                 {plan.name}
               </h3>
               <div className="mb-8 flex items-baseline gap-1">
-                <span className="text-4xl font-bold text-foreground">
+                <span className="font-display text-4xl font-bold text-foreground">
                   {plan.price}
                 </span>
                 {plan.period && (
-                  <span className="font-medium text-muted-foreground">
+                  <span className="font-mono text-label-sm text-muted-foreground">
                     {plan.period}
                   </span>
                 )}
               </div>
-              <ul className="mb-10 flex-grow space-y-4">
+              <ul className="mb-8 flex-grow space-y-3 font-mono text-sm">
                 {plan.features.map((f) => (
                   <li
                     key={f.label}
-                    className={`flex items-center gap-3 ${
+                    className={`flex items-center gap-2.5 ${
                       f.included
                         ? 'text-foreground'
                         : 'text-muted-foreground/50'
                     }`}
                   >
                     {f.included ? (
-                      <CheckCircle2 className="h-5 w-5 shrink-0 text-primary" />
+                      <Check className="h-3.5 w-3.5 shrink-0 text-primary" />
                     ) : (
-                      <XCircle className="h-5 w-5 shrink-0" />
+                      <Minus className="h-3.5 w-3.5 shrink-0" />
                     )}
                     {f.label}
                   </li>
@@ -63,10 +78,10 @@ export default function PricingPreview() {
               </ul>
               <Link
                 to={plan.to}
-                className={`block w-full rounded-xl py-3.5 text-center font-bold transition-all ${
+                className={`block w-full rounded-xl py-3 text-center text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   plan.featured
-                    ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:opacity-90'
-                    : 'border border-outline-variant text-foreground hover:bg-surface-container'
+                    ? 'bg-primary text-primary-foreground hover:opacity-90'
+                    : 'border border-border text-foreground hover:bg-muted'
                 }`}
               >
                 {plan.cta}

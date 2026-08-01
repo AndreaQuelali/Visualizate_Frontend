@@ -5,8 +5,8 @@ import HeroSection from './components/HeroSection';
 import SocialProof from './components/SocialProof';
 import FeaturesGrid from './components/FeaturesGrid';
 import HowItWorks from './components/HowItWorks';
-import ProductShowcase from './components/ProductShowcase';
 import BenefitsStrip from './components/BenefitsStrip';
+import ProductShowcase from './components/ProductShowcase';
 import UseCases from './components/UseCases';
 import Testimonials from './components/Testimonials';
 import PricingPreview from './components/PricingPreview';
@@ -29,8 +29,8 @@ export default function LandingPage() {
         <SocialProof />
         <FeaturesGrid />
         <HowItWorks />
-        <ProductShowcase />
         <BenefitsStrip />
+        <ProductShowcase />
         <UseCases />
         <Testimonials />
         <PricingPreview />

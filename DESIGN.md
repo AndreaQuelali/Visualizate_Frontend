@@ -20,26 +20,26 @@ El diseño de la interfaz debe transmitir:
 
 ## 2. Sistema de colores
 
-### 2.1 Token de marca
+### 2.1 Tokens de marca
 
-| Nombre        | Hex de referencia | OKLCH (en CSS)             | Uso                                      |
-| ------------- | ----------------- | -------------------------- | ---------------------------------------- |
-| Brand Primary | `#4648d4`         | `oklch(0.492 0.209 274.9)` | CTAs, focus rings, iconos, links activos |
+| Nombre          | Hex ref   | OKLCH                      | Uso                                               |
+| --------------- | --------- | -------------------------- | ------------------------------------------------- |
+| Brand Primary   | `#4648d4` | `oklch(0.492 0.209 274.9)` | CTAs, focus rings, iconos, links activos          |
+| Brand Secondary | `#ff6b2c` | `oklch(0.705 0.19 42)`     | Eyebrows, acentos, estados activos (nunca fondos) |
 
-`--primary` es el color de marca. En `index.css` se define en **OKLCH**. Usar
-siempre `bg-primary` / `text-primary` / `ring-primary` — no hardcodear colores
-en componentes.
+`--primary` = violeta. `--secondary` = naranja. En `index.css` (OKLCH). Usar
+siempre tokens Tailwind — no hardcodear colores en componentes.
 
 ### 2.2 Tokens semánticos (CSS variables OKLCH)
 
 Definidos en `src/index.css` (`:root` claro / `.dark` oscuro) con `oklch(...)`.
-Usar **siempre** estos tokens vía clases Tailwind.
+Paleta neutra blanco→negro (sin tinte azul).
 
 #### Modo claro (`:root`)
 
 | Token CSS              | Clase Tailwind                       | Descripción                          |
 | ---------------------- | ------------------------------------ | ------------------------------------ |
-| `--background`         | `bg-background`                      | Fondo de página                      |
+| `--background`         | `bg-background`                      | Fondo neutro (~`#fafafa`)            |
 | `--foreground`         | `text-foreground`                    | Texto principal                      |
 | `--card`               | `bg-card`                            | Fondo de tarjetas                    |
 | `--card-foreground`    | `text-card-foreground`               | Texto en tarjetas                    |
@@ -48,16 +48,16 @@ Usar **siempre** estos tokens vía clases Tailwind.
 | `--border`             | `border-border`                      | Bordes de componentes                |
 | `--input`              | `border-input`                       | Borde específico de inputs           |
 | `--ring`               | `ring-ring`                          | Focus ring estándar                  |
-| `--primary`            | `bg-primary`, `text-primary`         | Acciones primarias / marca           |
+| `--primary`            | `bg-primary`, `text-primary`         | Violeta de marca                     |
 | `--primary-foreground` | `text-primary-foreground`            | Texto sobre fondo primario           |
-| `--secondary`          | `bg-secondary`                       | Acciones secundarias                 |
+| `--secondary`          | `bg-secondary`, `text-secondary`     | Naranja de acento                    |
 | `--destructive`        | `bg-destructive`, `text-destructive` | Errores, alertas críticas            |
 | `--radius`             | `rounded-lg`                         | Radio base `0.625rem`                |
 
 #### Modo oscuro (`.dark`)
 
-Los mismos tokens se remapean en OKLCH. Usar siempre los tokens semánticos y
-**no hardcodear** hex/oklch sueltos en la UI.
+Fondo casi negro neutro (`oklch(0.13 0.005 285)`). Mismos nombres de token.
+Usar siempre tokens semánticos — **no hardcodear** hex/oklch sueltos.
 
 ### 2.3 Colores de fondo de inputs
 
@@ -72,26 +72,27 @@ Oscuro: dark:bg-muted  (token semántico)
 
 ## 3. Tipografía
 
-| Aspecto           | Valor                                               |
-| ----------------- | --------------------------------------------------- |
-| Familia principal | **Geist Variable** (`'Geist Variable', sans-serif`) |
-| Importación       | `@fontsource-variable/geist` (en `index.css`)       |
-| Token CSS         | `--font-sans`                                       |
-| Clase Tailwind    | `font-sans` (aplicada en `html`)                    |
-| Encabezados       | `--font-heading` = misma que `--font-sans`          |
+| Rol      | Familia                       | Clase Tailwind | Uso                                     |
+| -------- | ----------------------------- | -------------- | --------------------------------------- |
+| Display  | **Fraunces Variable** (serif) | `font-display` | Títulos, headlines, cifras editoriales  |
+| Cuerpo   | **Geist Variable**            | `font-sans`    | Párrafos, UI, formularios               |
+| Utilidad | **Geist Variable**            | `font-mono`    | Eyebrows, specs, chips de formato, logs |
 
-**Nunca** importar fuentes adicionales de Google Fonts u otras fuentes.
-Geist es la única fuente del proyecto.
+Importaciones en `index.css` vía `@fontsource-variable/*` (Fraunces como en ALIA).
+No usar Google Fonts CDN.
+
+**Color en tipografía de landing:** el violeta (`primary`) predomina en eyebrows y
+acentos de título. El naranja (`secondary`) solo en micro-detalles (badge, dots).
 
 ### Escala tipográfica de uso frecuente
 
-| Clase                   | Uso                                    |
-| ----------------------- | -------------------------------------- |
-| `text-2xl font-bold`    | Título de tarjeta principal (`h1`)     |
-| `text-xl font-bold`     | Título secundario (`h2`)               |
-| `text-sm`               | Texto de cuerpo, descripción           |
-| `text-xs font-semibold` | Labels de formulario                   |
-| `text-xs`               | Mensajes de error, helper text, footer |
+| Clase                            | Uso                           |
+| -------------------------------- | ----------------------------- |
+| `font-display text-display-hero` | Hero desktop                  |
+| `font-display text-headline-xl`  | Títulos de sección            |
+| `font-display text-headline-md`  | Subtítulos / cards destacadas |
+| `text-body-lg` / `text-body-md`  | Cuerpo                        |
+| `font-mono text-label-sm`        | Eyebrows y specs técnicas     |
 
 ---
 
