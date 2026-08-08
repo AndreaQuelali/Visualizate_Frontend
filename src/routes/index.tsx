@@ -11,6 +11,9 @@ import VerifyEmailDetail from '../features/auth/components/VerifyEmailDetail';
 import ProfileForm from '../features/auth/components/ProfileForm';
 import DashboardPage from '../features/dashboard/DashboardPage';
 import LandingPage from '../features/landing/LandingPage';
+import WorkspaceListPage from '../features/workspace/pages/WorkspaceListPage';
+import WorkspaceSettingsPage from '../features/workspace/pages/WorkspaceSettingsPage';
+import AcceptInvitationPage from '../features/workspace/pages/AcceptInvitationPage';
 
 export const router = createBrowserRouter([
   {
@@ -33,11 +36,21 @@ export const router = createBrowserRouter([
     path: '/',
     element: <ProtectedRoute />,
     children: [
-      { path: 'dashboard', element: <DashboardPage /> },
       {
-        path: '',
         element: <AppLayout />,
-        children: [{ path: 'profile', element: <ProfileForm /> }],
+        children: [
+          { path: 'dashboard', element: <DashboardPage /> },
+          { path: 'profile', element: <ProfileForm /> },
+          { path: 'workspaces', element: <WorkspaceListPage /> },
+          {
+            path: 'workspaces/accept-invitation',
+            element: <AcceptInvitationPage />,
+          },
+          {
+            path: 'workspaces/:id/settings',
+            element: <WorkspaceSettingsPage />,
+          },
+        ],
       },
     ],
   },

@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { useWorkspaceStore } from './workspaceStore';
 
 export interface User {
   id: string;
@@ -41,6 +42,7 @@ export const useAuthStore = create<AuthState>((set) => {
     logout: () => {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      useWorkspaceStore.getState().clearActiveWorkspace();
       set({ token: null, user: null, isAuthenticated: false });
     },
     updateUser: (updatedFields) => {
