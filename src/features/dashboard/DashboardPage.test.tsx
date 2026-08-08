@@ -1,31 +1,41 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import DashboardPage from './DashboardPage';
 
-const mockNavigate = vi.fn();
-vi.mock('react-router-dom', async () => {
-  const actual =
-    await vi.importActual<typeof import('react-router-dom')>(
-      'react-router-dom',
-    );
-  return { ...actual, useNavigate: () => mockNavigate };
-});
-
-const mockLogout = vi.fn();
-const mockState = {
-  user: {
-    fullName: 'Carlos López',
-    email: 'carlos@example.com',
-    id: '1',
-    isVerified: true,
+vi.mock('@/store/workspaceStore', () => ({
+  useWorkspaceStore: (
+    selector?: (state: {
+      activeWorkspaceId: string;
+      setActiveWorkspace: () => void;
+      clearActiveWorkspace: () => void;
+    }) => unknown,
+  ) => {
+    const state = {
+      activeWorkspaceId: 'ws-1',
+      setActiveWorkspace: vi.fn(),
+      clearActiveWorkspace: vi.fn(),
+    };
+    return selector ? selector(state) : state;
   },
-  logout: mockLogout,
-};
+}));
 
-vi.mock('../../store/authStore', () => ({
-  useAuthStore: (selector?: (state: typeof mockState) => unknown) =>
-    selector ? selector(mockState) : mockState,
+vi.mock('@/features/workspace/hooks/useWorkspaces', () => ({
+  useWorkspaces: () => ({
+    data: [
+      {
+        id: 'ws-1',
+        name: 'Equipo Marketing',
+        description: null,
+        logoUrl: null,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        role: 'ADMIN',
+        memberCount: 3,
+      },
+    ],
+    isLoading: false,
+  }),
 }));
 
 describe('DashboardPage', () => {
@@ -33,37 +43,25 @@ describe('DashboardPage', () => {
     vi.clearAllMocks();
   });
 
-  it('muestra el texto "SOY DASHBOARD"', () => {
+  it('muestra el nombre del workspace activo', () => {
     render(
       <MemoryRouter>
         <DashboardPage />
       </MemoryRouter>,
     );
     expect(
-      screen.getByRole('heading', { name: /soy dashboard/i }),
+      screen.getByRole('heading', { name: /equipo marketing/i }),
     ).toBeInTheDocument();
   });
 
-  it('muestra el botón de cerrar sesión', () => {
+  it('muestra enlace a espacios de trabajo', () => {
     render(
       <MemoryRouter>
         <DashboardPage />
       </MemoryRouter>,
     );
     expect(
-      screen.getByRole('button', { name: /cerrar sesión/i }),
+      screen.getByRole('link', { name: /ver espacios/i }),
     ).toBeInTheDocument();
-  });
-
-  it('al hacer clic en cerrar sesión ejecuta logout y navega a /login', () => {
-    render(
-      <MemoryRouter>
-        <DashboardPage />
-      </MemoryRouter>,
-    );
-    const btn = screen.getByRole('button', { name: /cerrar sesión/i });
-    fireEvent.click(btn);
-    expect(mockLogout).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith('/login', { replace: true });
   });
 });
