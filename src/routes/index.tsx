@@ -14,6 +14,9 @@ import LandingPage from '../features/landing/LandingPage';
 import WorkspaceListPage from '../features/workspace/pages/WorkspaceListPage';
 import WorkspaceSettingsPage from '../features/workspace/pages/WorkspaceSettingsPage';
 import AcceptInvitationPage from '../features/workspace/pages/AcceptInvitationPage';
+import TemplatesPage from '../features/templates/pages/TemplatesPage';
+import AssetsPage from '../features/assets/pages/AssetsPage';
+import BrandPage from '../features/brand/pages/BrandPage';
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +44,9 @@ export const router = createBrowserRouter([
         children: [
           { path: 'dashboard', element: <DashboardPage /> },
           { path: 'profile', element: <ProfileForm /> },
+          { path: 'templates', element: <TemplatesPage /> },
+          { path: 'assets', element: <AssetsPage /> },
+          { path: 'brand', element: <BrandPage /> },
           { path: 'workspaces', element: <WorkspaceListPage /> },
           {
             path: 'workspaces/accept-invitation',
