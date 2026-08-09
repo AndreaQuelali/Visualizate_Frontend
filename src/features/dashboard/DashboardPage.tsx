@@ -1,44 +1,71 @@
-import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../../store/authStore';
+import { Link, Navigate } from 'react-router-dom';
+import { ArrowRight, Layers3, Settings } from 'lucide-react';
+import { useWorkspaceStore } from '@/store/workspaceStore';
+import { useWorkspaces } from '@/features/workspace/hooks/useWorkspaces';
+import { Button } from '@/components/ui/button';
+import PageContainer from '@/components/PageContainer';
 
 export default function DashboardPage() {
-  const navigate = useNavigate();
-  const logout = useAuthStore((s) => s.logout);
+  const activeWorkspaceId = useWorkspaceStore((s) => s.activeWorkspaceId);
+  const { data: workspaces = [], isLoading } = useWorkspaces();
+  const active = workspaces.find((w) => w.id === activeWorkspaceId);
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login', { replace: true });
-  };
+  if (!isLoading && !activeWorkspaceId) {
+    return <Navigate to="/workspaces" replace />;
+  }
+
+  if (!isLoading && activeWorkspaceId && !active) {
+    return <Navigate to="/workspaces" replace />;
+  }
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center gap-6 bg-white dark:bg-background p-6 text-center">
-      <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
-        SOY DASHBOARD
-      </h1>
+    <PageContainer>
+      <div className="mb-8">
+        <p className="mb-1 text-xs font-medium uppercase tracking-[0.18em] text-primary">
+          Dashboard
+        </p>
+        <h1 className="font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
+          {active?.name ?? 'Cargando…'}
+        </h1>
+        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+          Estás trabajando en este espacio. Eventos, plantillas, assets y
+          miembros se filtrarán según el workspace activo.
+        </p>
+      </div>
 
-      <button
-        id="btn-logout-dashboard"
-        type="button"
-        onClick={handleLogout}
-        className="inline-flex items-center gap-2 rounded-xl bg-[#5c54e5] px-5 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-[#4b44d4] active:scale-95 transition-all"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1"
-          />
-        </svg>
-        Cerrar sesión
-      </button>
-    </div>
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+          <div className="mb-3 flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+            <Layers3 className="size-5" />
+          </div>
+          <h2 className="font-medium">Cambiar de espacio</h2>
+          <p className="mt-1 mb-4 text-sm text-muted-foreground">
+            Elige otro workspace o crea uno nuevo.
+          </p>
+          <Button render={<Link to="/workspaces" />}>
+            Ver espacios
+            <ArrowRight className="size-4" />
+          </Button>
+        </div>
+
+        {active?.role === 'ADMIN' && (
+          <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+            <div className="mb-3 flex size-10 items-center justify-center rounded-xl bg-secondary/15 text-secondary">
+              <Settings className="size-5" />
+            </div>
+            <h2 className="font-medium">Configuración</h2>
+            <p className="mt-1 mb-4 text-sm text-muted-foreground">
+              Edita el espacio, gestiona miembros e invitaciones.
+            </p>
+            <Button
+              variant="outline"
+              render={<Link to={`/workspaces/${active.id}/settings`} />}
+            >
+              Abrir configuración
+            </Button>
+          </div>
+        )}
+      </div>
+    </PageContainer>
   );
 }
