@@ -1,8 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
 import {
   ChevronsUpDown,
+  Images,
   LayoutDashboard,
+  LayoutTemplate,
   LogOut,
+  Palette,
   Plus,
   Settings,
   User,
@@ -72,6 +75,9 @@ export default function Sidebar({ onCreateWorkspace }: SidebarProps) {
 
   const navItems = [
     { label: 'Dashboard', to: '/dashboard', icon: LayoutDashboard },
+    { label: 'Plantillas', to: '/templates', icon: LayoutTemplate },
+    { label: 'Assets', to: '/assets', icon: Images },
+    { label: 'Marca', to: '/brand', icon: Palette },
     {
       label: 'Configuración',
       to: active ? `/workspaces/${active.id}/settings` : '/workspaces',
@@ -176,8 +182,7 @@ export default function Sidebar({ onCreateWorkspace }: SidebarProps) {
       <nav className="flex flex-1 flex-col gap-1 px-3">
         {navItems
           .filter(
-            (item) =>
-              !item.adminOnly || !active || active.role === 'ADMIN',
+            (item) => !item.adminOnly || !active || active.role === 'ADMIN',
           )
           .map((item) => {
             const Icon = item.icon;
@@ -217,9 +222,7 @@ export default function Sidebar({ onCreateWorkspace }: SidebarProps) {
             </Avatar>
             {isSidebarOpen && (
               <div className="min-w-0 flex-1 text-left">
-                <p className="truncate text-sm font-medium">
-                  {user?.fullName}
-                </p>
+                <p className="truncate text-sm font-medium">{user?.fullName}</p>
                 <p className="truncate text-xs text-muted-foreground">
                   {user?.email}
                 </p>
