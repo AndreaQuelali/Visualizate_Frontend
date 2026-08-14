@@ -90,6 +90,19 @@ export const templatesApi = {
     return data;
   },
 
+  saveDraft: async (
+    workspaceId: string,
+    id: string,
+    document: unknown,
+  ): Promise<{ versionId: string; version: number; savedAt: string }> => {
+    const { data } = await api.post<{
+      versionId: string;
+      version: number;
+      savedAt: string;
+    }>(`${base(workspaceId)}/${id}/versions`, { document });
+    return data;
+  },
+
   publish: async (workspaceId: string, id: string): Promise<TemplateDetail> => {
     const { data } = await api.post<TemplateDetail>(
       `${base(workspaceId)}/${id}/publish`,

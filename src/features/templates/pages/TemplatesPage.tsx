@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import {
   Archive,
   ArchiveRestore,
@@ -188,7 +188,16 @@ export default function TemplatesPage() {
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
                   <h2 className="truncate font-medium" title={tpl.name}>
-                    {tpl.name}
+                    {canEditTemplates && tpl.status !== 'ARCHIVED' ? (
+                      <Link
+                        to={`/templates/${tpl.id}/edit`}
+                        className="hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      >
+                        {tpl.name}
+                      </Link>
+                    ) : (
+                      tpl.name
+                    )}
                   </h2>
                   <p className="mt-1 line-clamp-2 min-h-8 text-sm text-muted-foreground">
                     {tpl.description || 'Sin descripción'}
@@ -263,6 +272,14 @@ export default function TemplatesPage() {
                   <span className="text-muted-foreground">
                     v{tpl.latestVersion}
                   </span>
+                )}
+                {tpl.status === 'PUBLISHED' && (
+                  <Link
+                    to={`/pieces/new?template=${tpl.id}`}
+                    className="ml-auto text-primary hover:underline"
+                  >
+                    Usar plantilla
+                  </Link>
                 )}
               </div>
             </li>
