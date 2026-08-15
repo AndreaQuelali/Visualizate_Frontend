@@ -31,6 +31,39 @@ export function useTemplates(
   });
 }
 
+export function useTemplate(
+  workspaceId: string | null | undefined,
+  id: string | undefined,
+) {
+  return useQuery({
+    queryKey: [...templateKeys.all(workspaceId ?? ''), 'detail', id ?? ''],
+    queryFn: () => templatesApi.get(workspaceId!, id!),
+    enabled: !!workspaceId && !!id,
+    // The editor owns the document while open; do not refetch under it.
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
+}
+
+export function useSaveDraft(workspaceId: string, id: string) {
+  return useMutation({
+    mutationFn: (document: unknown) =>
+      templatesApi.saveDraft(workspaceId, id, document),
+  });
+}
+
+export function usePublishTemplate(workspaceId: string) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => templatesApi.publish(workspaceId, id),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({
+        queryKey: templateKeys.all(workspaceId),
+      });
+    },
+  });
+}
+
 function useInvalidate(workspaceId: string) {
   const queryClient = useQueryClient();
   return () =>

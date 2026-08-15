@@ -17,6 +17,10 @@ import AcceptInvitationPage from '../features/workspace/pages/AcceptInvitationPa
 import TemplatesPage from '../features/templates/pages/TemplatesPage';
 import AssetsPage from '../features/assets/pages/AssetsPage';
 import BrandPage from '../features/brand/pages/BrandPage';
+import TemplateEditorPage from '../features/templates/pages/TemplateEditorPage';
+import PiecesPage from '../features/pieces/pages/PiecesPage';
+import NewPiecePage from '../features/pieces/pages/NewPiecePage';
+import PieceEditorPage from '../features/pieces/pages/PieceEditorPage';
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +49,10 @@ export const router = createBrowserRouter([
           { path: 'dashboard', element: <DashboardPage /> },
           { path: 'profile', element: <ProfileForm /> },
           { path: 'templates', element: <TemplatesPage /> },
+          { path: 'templates/:id/edit', element: <TemplateEditorPage /> },
+          { path: 'pieces', element: <PiecesPage /> },
+          { path: 'pieces/new', element: <NewPiecePage /> },
+          { path: 'pieces/:id', element: <PieceEditorPage /> },
           { path: 'assets', element: <AssetsPage /> },
           { path: 'brand', element: <BrandPage /> },
           { path: 'workspaces', element: <WorkspaceListPage /> },
