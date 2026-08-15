@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import {
   ChevronsUpDown,
+  FileImage,
   Images,
   LayoutDashboard,
   LayoutTemplate,
@@ -75,6 +76,7 @@ export default function Sidebar({ onCreateWorkspace }: SidebarProps) {
 
   const navItems = [
     { label: 'Dashboard', to: '/dashboard', icon: LayoutDashboard },
+    { label: 'Piezas', to: '/pieces', icon: FileImage },
     { label: 'Plantillas', to: '/templates', icon: LayoutTemplate },
     { label: 'Assets', to: '/assets', icon: Images },
     { label: 'Marca', to: '/brand', icon: Palette },
