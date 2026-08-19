@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -74,16 +75,18 @@ export default function ExportMenu({
           <ChevronDown className="size-3.5 opacity-60" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
-          <DropdownMenuLabel>Formato</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          {EXPORT_OPTIONS.map((o) => (
-            <DropdownMenuItem
-              key={o.label}
-              onClick={() => void start(o.payload)}
-            >
-              {o.label}
-            </DropdownMenuItem>
-          ))}
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Formato</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            {EXPORT_OPTIONS.map((o) => (
+              <DropdownMenuItem
+                key={o.label}
+                onClick={() => void start(o.payload)}
+              >
+                {o.label}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
       {blockedReason && (

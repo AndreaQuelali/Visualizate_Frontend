@@ -320,7 +320,10 @@ function Workbench({
                     <FieldInput
                       field={f}
                       value={field.value ?? ''}
-                      onChange={field.onChange}
+                      onChange={(value) => {
+                        field.onChange(value);
+                        setBanner(null);
+                      }}
                       error={errors[f.key]?.message}
                       workspaceId={workspaceId}
                       assets={assets}
