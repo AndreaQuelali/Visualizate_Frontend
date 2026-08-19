@@ -55,6 +55,10 @@ import { buildPieceSchema, toFormValues } from '../schema';
 import FieldInput from '../components/FieldInput';
 import ExportMenu from '@/features/render/components/ExportMenu';
 import RenderHistory from '@/features/render/components/RenderHistory';
+import ReviewPanel from '@/features/review/components/ReviewPanel';
+import type { ReviewItem } from '@/features/review/api/review.api';
+import { applyPatchPreview } from '@/features/review/preview';
+import { applyOverrides } from '../overrides';
 import { PIECE_STATUS_LABEL } from './PiecesPage';
 
 type Values = Record<string, string>;
@@ -66,7 +70,10 @@ interface WorkbenchProps {
   assets: Asset[];
   workspaceId: string;
   canUpload: boolean;
+  isAdmin: boolean;
   onNotice: (text: string) => void;
+  /** The piece was changed on the server (review applied/reverted). */
+  onPieceChanged: (message: string) => void;
 }
 
 function Workbench({
@@ -76,7 +83,9 @@ function Workbench({
   assets,
   workspaceId,
   canUpload,
+  isAdmin,
   onNotice,
+  onPieceChanged,
 }: WorkbenchProps) {
   const navigate = useNavigate();
   const update = useUpdatePiece(workspaceId, piece.id);
@@ -114,6 +123,22 @@ function Workbench({
 
   const values = watch();
   const preview = useDebounced(values, 150);
+  const [previewItem, setPreviewItem] = useState<ReviewItem | null>(null);
+  // Template + applied recommendations; hovering a pending one shows its result.
+  const baseDoc = useMemo(
+    () => applyOverrides(doc, piece.overrides),
+    [doc, piece.overrides],
+  );
+  const shown = useMemo(
+    () =>
+      previewItem?.patch
+        ? applyPatchPreview(baseDoc, preview, previewItem.patch)
+        : { doc: baseDoc, data: preview },
+    [baseDoc, preview, previewItem],
+  );
+  const highlight = previewItem?.target?.layerId
+    ? shown.doc.layers.find((l) => l.id === previewItem.target?.layerId)
+    : undefined;
   const dirty = isDirty || title.trim() !== savedTitle;
   const blocker = useBlocker(dirty && !update.isPending);
 
@@ -420,17 +445,46 @@ function Workbench({
         >
           <div className="flex justify-center">
             <TemplateCanvas
-              document={doc}
-              data={preview}
+              document={shown.doc}
+              data={shown.data}
               brand={brand}
               assetUrls={assetUrls}
               scale={scale}
               onTextOverflow={onTextOverflow}
+              overlay={
+                highlight ? (
+                  <div
+                    className="absolute"
+                    style={{
+                      left: highlight.x,
+                      top: highlight.y,
+                      width: highlight.width,
+                      height: highlight.height,
+                      outline: `${4 / scale}px dashed #4648d4`,
+                      outlineOffset: `${2 / scale}px`,
+                    }}
+                  />
+                ) : undefined
+              }
             />
           </div>
           <p className="mt-3 text-center text-xs text-muted-foreground">
-            {doc.canvas.width}×{doc.canvas.height} px · vista previa en vivo
+            {doc.canvas.width}×{doc.canvas.height} px ·{' '}
+            {previewItem?.patch
+              ? 'así quedaría con la recomendación'
+              : 'vista previa en vivo'}
           </p>
+          <div className="mt-4 border-t border-border pt-4">
+            <ReviewPanel
+              workspaceId={workspaceId}
+              pieceId={piece.id}
+              isAdmin={isAdmin}
+              dirty={dirty}
+              archived={archived}
+              onPreview={setPreviewItem}
+              onPieceChanged={onPieceChanged}
+            />
+          </div>
         </div>
       </div>
 
@@ -495,6 +549,7 @@ export default function PieceEditorPage() {
   const {
     workspaceId,
     canEditTemplates,
+    isAdmin,
     isLoading: wsLoading,
   } = useActiveWorkspace();
   const {
@@ -507,6 +562,8 @@ export default function PieceEditorPage() {
   const { data: assets = [] } = useAssets(workspaceId);
   useBrandFonts(brand, assets);
   const [notice, setNotice] = useState<string | null>(null);
+  // Bumped when the piece changes server-side so the form reloads clean.
+  const [revision, setRevision] = useState(0);
 
   if (!wsLoading && !workspaceId) return <Navigate to="/workspaces" replace />;
 
@@ -546,14 +603,19 @@ export default function PieceEditorPage() {
         </p>
       )}
       <Workbench
-        key={`${piece.id}:${piece.templateVersionId}`}
+        key={`${piece.id}:${piece.templateVersionId}:${revision}`}
         piece={piece}
         doc={piece.document}
         brand={brand}
         assets={assets}
         workspaceId={workspaceId}
         canUpload={canEditTemplates}
+        isAdmin={isAdmin}
         onNotice={setNotice}
+        onPieceChanged={(message) => {
+          setNotice(message);
+          setRevision((r) => r + 1);
+        }}
       />
     </>
   );
