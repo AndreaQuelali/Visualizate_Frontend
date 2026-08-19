@@ -4,6 +4,8 @@ import type { ColorRef, FontRef, Layer } from '../types/document';
 export type FieldValues = Record<string, string>;
 
 const FALLBACK_COLOR = '#000000';
+/** CSS generic families must not be quoted. */
+const GENERIC_FAMILIES = new Set(['sans-serif', 'serif', 'monospace']);
 
 export function resolveColor(ref: ColorRef, brand?: Brand): string {
   if ('hex' in ref) return ref.hex;
@@ -17,7 +19,9 @@ export function resolveFontFamily(ref: FontRef, brand?: Brand): string {
     'family' in ref
       ? ref.family
       : brand?.fonts.find((f) => f.id === ref.brandFontId)?.family;
-  return family ? `"${family}", sans-serif` : 'sans-serif';
+  if (!family) return 'sans-serif';
+  if (GENERIC_FAMILIES.has(family)) return family;
+  return `"${family}", sans-serif`;
 }
 
 /** The bound field value for a layer, or undefined when it is not bound. */
