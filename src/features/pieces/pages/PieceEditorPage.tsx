@@ -13,7 +13,6 @@ import {
   ArchiveRestore,
   ArrowLeft,
   Check,
-  Download,
   Loader2,
   RefreshCw,
   Trash2,
@@ -54,6 +53,8 @@ import {
 } from '../hooks/usePieces';
 import { buildPieceSchema, toFormValues } from '../schema';
 import FieldInput from '../components/FieldInput';
+import ExportMenu from '@/features/render/components/ExportMenu';
+import RenderHistory from '@/features/render/components/RenderHistory';
 import { PIECE_STATUS_LABEL } from './PiecesPage';
 
 type Values = Record<string, string>;
@@ -153,6 +154,13 @@ function Workbench({
       1,
     ),
   );
+
+  const exportBlockedReason =
+    piece.status !== 'READY'
+      ? 'Marca la pieza como lista para exportarla.'
+      : dirty
+        ? 'Guarda tus cambios para exportar la última versión.'
+        : null;
 
   const persist = async (status?: PieceStatus): Promise<boolean> => {
     setBanner(null);
@@ -312,7 +320,10 @@ function Workbench({
                     <FieldInput
                       field={f}
                       value={field.value ?? ''}
-                      onChange={field.onChange}
+                      onChange={(value) => {
+                        field.onChange(value);
+                        setBanner(null);
+                      }}
                       error={errors[f.key]?.message}
                       workspaceId={workspaceId}
                       assets={assets}
@@ -364,16 +375,11 @@ function Workbench({
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              disabled
-              title="La exportación a PNG/PDF llega en la siguiente fase"
-            >
-              <Download className="size-4" />
-              Exportar (próximamente)
-            </Button>
+            <ExportMenu
+              workspaceId={workspaceId}
+              pieceId={piece.id}
+              blockedReason={exportBlockedReason}
+            />
             <Button
               type="button"
               variant="ghost"
@@ -399,6 +405,12 @@ function Workbench({
               Eliminar
             </Button>
           </div>
+
+          <RenderHistory
+            workspaceId={workspaceId}
+            pieceId={piece.id}
+            canRetry={piece.status === 'READY' && !dirty}
+          />
         </form>
 
         <div

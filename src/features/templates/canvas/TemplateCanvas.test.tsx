@@ -77,6 +77,14 @@ describe('TemplateCanvas', () => {
     expect(layer).toHaveStyle({ left: '10px', top: '20px', width: '300px' });
   });
 
+  it('uses generic font families unquoted and brand fonts quoted', () => {
+    render(<TemplateCanvas document={doc()} brand={brand} />);
+    expect(screen.getByText('Siempre igual').style.fontFamily).toBe('serif');
+    expect(screen.getByText('Texto de ejemplo').style.fontFamily).toContain(
+      'Inter',
+    );
+  });
+
   it('renders bound text literally (no HTML injection)', () => {
     render(
       <TemplateCanvas
