@@ -1,4 +1,5 @@
 import api from '@/lib/axios';
+import type { PieceOverrides } from '../overrides';
 
 export type PieceStatus = 'DRAFT' | 'READY' | 'ARCHIVED';
 
@@ -21,6 +22,8 @@ export interface PieceSummary {
 export interface PieceDetail extends PieceSummary {
   /** TemplateDocument of the version this piece is pinned to. */
   document: unknown;
+  /** Applied review recommendations, layered over the template document. */
+  overrides: PieceOverrides;
 }
 
 export interface UpdatePiecePayload {
