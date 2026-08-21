@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useSearchParams } from 'react-router-dom';
 import {
   Archive,
   ArchiveRestore,
@@ -59,6 +59,7 @@ export default function TemplatesPage() {
   const [showArchived, setShowArchived] = useState(false);
   const [query, setQuery] = useState('');
   const [createOpen, setCreateOpen] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [toDelete, setToDelete] = useState<TemplateSummary | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -71,6 +72,13 @@ export default function TemplatesPage() {
     status: showArchived ? 'ARCHIVED' : undefined,
     q: query.trim() || undefined,
   });
+  // Deep link from the dashboard quick action: /templates?new=1
+  const wantsNew = searchParams.get('new') === '1';
+  const createDialogOpen = createOpen || (wantsNew && canEditTemplates);
+  const handleCreateOpenChange = (open: boolean) => {
+    setCreateOpen(open);
+    if (!open && wantsNew) setSearchParams({}, { replace: true });
+  };
   const update = useUpdateTemplate(workspaceId ?? '');
   const duplicate = useDuplicateTemplate(workspaceId ?? '');
   const remove = useDeleteTemplate(workspaceId ?? '');
@@ -290,8 +298,8 @@ export default function TemplatesPage() {
       {workspaceId && (
         <CreateTemplateDialog
           workspaceId={workspaceId}
-          open={createOpen}
-          onOpenChange={setCreateOpen}
+          open={createDialogOpen}
+          onOpenChange={handleCreateOpenChange}
         />
       )}
 
