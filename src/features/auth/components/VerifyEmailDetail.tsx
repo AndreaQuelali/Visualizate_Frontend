@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { CheckCircle, XCircle, Loader2 } from 'lucide-react';
 import api from '../../../lib/axios';
@@ -11,7 +11,12 @@ export default function VerifyEmailDetail() {
   );
   const [errorMessage, setErrorMessage] = useState('');
 
+  // The token is single-use: StrictMode runs effects twice in development.
+  const requestedToken = useRef<string | null>(null);
+
   useEffect(() => {
+    if (requestedToken.current === token) return;
+    requestedToken.current = token;
     const verifyToken = async () => {
       if (!token) {
         setStatus('error');

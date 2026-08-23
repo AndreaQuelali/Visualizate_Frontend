@@ -1,0 +1,97 @@
+name: E2E
+
+on:
+  pull_request:
+  push:
+    branches: [main, develop]
+
+jobs:
+  full-flow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: visualizate
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+      redis:
+        image: redis:7-alpine
+        ports: ['6379:6379']
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/visualizate
+      JWT_SECRET: ci-only-secret
+      REDIS_HOST: localhost
+      REDIS_PORT: '6379'
+      MINIO_ENDPOINT: localhost
+      MINIO_PORT: '9000'
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+      MINIO_BUCKET: visualizate
+      SMTP_HOST: localhost
+      SMTP_PORT: '1025'
+      THROTTLE_IP_LIMIT: '100000'
+      THROTTLE_USER_LIMIT: '100000'
+      # No OPENAI_API_KEY: the review falls back to the automatic rules.
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check out the backend next to the frontend
+        uses: actions/checkout@v4
+        with:
+          repository: AndreaQuelali/Visualizate_Backend
+          path: backend
+          # Needed while the backend repository is private.
+          token: ${{ secrets.BACKEND_REPO_TOKEN || github.token }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Start MinIO and Mailpit
+        run: |
+          docker run -d --name minio -p 9000:9000 \
+            -e MINIO_ROOT_USER=minioadmin -e MINIO_ROOT_PASSWORD=minioadmin \
+            minio/minio server /data
+          docker run -d --name mailpit -p 1025:1025 -p 8025:8025 axllent/mailpit
+      - name: Build and start the backend (API and worker)
+        working-directory: backend
+        run: |
+          npm ci
+          npx prisma migrate deploy
+          npm run build
+          npx playwright install --with-deps chromium
+          RUN_WORKERS=false LOG_LEVEL=warn node dist/src/main.js > ../api.log 2>&1 &
+          LOG_LEVEL=info node dist/src/worker.js > ../worker.log 2>&1 &
+      - name: Start the frontend
+        run: |
+          npm ci
+          npx vite --port 5173 --strictPort > vite.log 2>&1 &
+      - name: Wait for the stack
+        run: |
+          for url in http://localhost:3000/health http://localhost:5173 http://localhost:8025/api/v1/messages; do
+            for i in $(seq 1 60); do
+              curl -sf "$url" > /dev/null && break
+              sleep 2
+            done
+            curl -sf "$url" > /dev/null
+          done
+      - name: Run the full-flow journey
+        run: npm run e2e
+      - name: Upload report and logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-diagnostics
+          path: |
+            playwright-report
+            test-results
+            api.log
+            worker.log
+            vite.log
